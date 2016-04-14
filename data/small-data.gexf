@@ -1,0 +1,1013 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.1" xmlns="http://www.gexf.net/1.1draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <graph defaultedgetype="directed" mode="static">
+    <attributes class="edge" mode="static">
+      <attribute id="4" title="relation" type="string" />
+    </attributes>
+    <attributes class="node" mode="static">
+      <attribute id="0" title="lemmas" type="string" />
+      <attribute id="1" title="type" type="string" />
+      <attribute id="2" title="tense" type="string" />
+      <attribute id="3" title="definition" type="string" />
+    </attributes>
+    <nodes>
+      <node id="by.r.01" label="by">
+        <attvalues>
+          <attvalue for="0" value="by,past" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="so as to pass a given point" />
+        </attvalues>
+      </node>
+      <node id="vitamin_a.n.01" label="vitamin a">
+        <attvalues>
+          <attvalue for="0" value="vitamin_A,antiophthalmic_factor,axerophthol,A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="any of several fat-soluble vitamins essential for normal vision; prevents night blindness or inflammation or dryness of the eyes" />
+        </attvalues>
+      </node>
+      <node id="on.a.01" label="on">
+        <attvalues>
+          <attvalue for="0" value="on" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="a" />
+          <attvalue for="3" value="in operation or operational" />
+        </attvalues>
+      </node>
+      <node id="on.a.02" label="on">
+        <attvalues>
+          <attvalue for="0" value="on" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="a" />
+          <attvalue for="3" value="(of events) planned or scheduled" />
+        </attvalues>
+      </node>
+      <node id="is" label="is">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="on.r.03" label="on">
+        <attvalues>
+          <attvalue for="0" value="on" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="in a state required for something to function or be effective" />
+        </attvalues>
+      </node>
+      <node id="implant.v.01" label="implant">
+        <attvalues>
+          <attvalue for="0" value="implant,engraft,embed,imbed,plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="fix or set securely or deeply" />
+        </attvalues>
+      </node>
+      <node id="plant.n.03" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="an actor situated in the audience whose acting is rehearsed but seems spontaneous to the audience" />
+        </attvalues>
+      </node>
+      <node id="hood.n.10" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(zoology) an expandable part or marking that resembles a hood on the head or neck of an animal" />
+        </attvalues>
+      </node>
+      <node id="indiana.n.01" label="indiana">
+        <attvalues>
+          <attvalue for="0" value="Indiana,Hoosier_State,IN" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a state in midwestern United States" />
+        </attvalues>
+      </node>
+      <node id="in.r.01" label="in">
+        <attvalues>
+          <attvalue for="0" value="in,inwards,inward" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="to or toward the inside of" />
+        </attvalues>
+      </node>
+      <node id="trunk.n.02" label="trunk">
+        <attvalues>
+          <attvalue for="0" value="trunk" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="luggage consisting of a large strong case used when traveling or for storage" />
+        </attvalues>
+      </node>
+      <node id="indium.n.01" label="indium">
+        <attvalues>
+          <attvalue for="0" value="indium,In,atomic_number_49" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a rare soft silvery metallic element; occurs in small quantities in sphalerite" />
+        </attvalues>
+      </node>
+      <node id="trunk.n.01" label="trunk">
+        <attvalues>
+          <attvalue for="0" value="trunk,tree_trunk,bole" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the main stem of a tree; usually covered with bark; the bole is usually the part that is commercially useful for lumber" />
+        </attvalues>
+      </node>
+      <node id="organism.n.01" label="organism">
+        <attvalues>
+          <attvalue for="0" value="organism,being" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a living thing that has (or can develop) the ability to act or function independently" />
+        </attvalues>
+      </node>
+      <node id="hood" label="hood">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="plant.n.04" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="something planted secretly for discovery by another" />
+        </attvalues>
+      </node>
+      <node id="constitute.v.01" label="constitute">
+        <attvalues>
+          <attvalue for="0" value="constitute,represent,make_up,comprise,be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="form or compose" />
+        </attvalues>
+      </node>
+      <node id="in.s.02" label="in">
+        <attvalues>
+          <attvalue for="0" value="in" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="s" />
+          <attvalue for="3" value="directed or bound inward" />
+        </attvalues>
+      </node>
+      <node id="hood.v.01" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="cover with a hood" />
+        </attvalues>
+      </node>
+      <node id="angstrom.n.01" label="angstrom">
+        <attvalues>
+          <attvalue for="0" value="angstrom,angstrom_unit,A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a metric unit of length equal to one ten billionth of a meter (or 0.0001 micron); used to specify wavelengths of electromagnetic radiation" />
+        </attvalues>
+      </node>
+      <node id="hood.n.04" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood,lens_hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a tubular attachment used to keep stray light out of the lens of a camera" />
+        </attvalues>
+      </node>
+      <node id="hood.n.05" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(falconry) a leather covering for a hawk's head" />
+        </attvalues>
+      </node>
+      <node id="deoxyadenosine_monophosphate.n.01" label="deoxyadenosine monophosphate">
+        <attvalues>
+          <attvalue for="0" value="deoxyadenosine_monophosphate,A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="one of the four nucleotides used in building DNA; all four nucleotides have a common phosphate group and a sugar (ribose)" />
+        </attvalues>
+      </node>
+      <node id="hood.n.08" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a headdress that protects the head and face" />
+        </attvalues>
+      </node>
+      <node id="equal.v.01" label="equal">
+        <attvalues>
+          <attvalue for="0" value="equal,be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="be identical or equivalent to" />
+        </attvalues>
+      </node>
+      <node id="proboscis.n.02" label="proboscis">
+        <attvalues>
+          <attvalue for="0" value="proboscis,trunk" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a long flexible snout as of an elephant" />
+        </attvalues>
+      </node>
+      <node id="be.v.12" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="to remain unmolested, undisturbed, or uninterrupted -- used only in infinitive form" />
+        </attvalues>
+      </node>
+      <node id="be.v.11" label="be">
+        <attvalues>
+          <attvalue for="0" value="be,live" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="have life, be alive" />
+        </attvalues>
+      </node>
+      <node id="be.v.10" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="spend or use time" />
+        </attvalues>
+      </node>
+      <node id="a.n.07" label="a">
+        <attvalues>
+          <attvalue for="0" value="A,type_A,group_A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the blood group whose red cells carry the A antigen" />
+        </attvalues>
+      </node>
+      <node id="a.n.06" label="a">
+        <attvalues>
+          <attvalue for="0" value="A,a" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the 1st letter of the Roman alphabet" />
+        </attvalues>
+      </node>
+      <node id="plantae" label="plantae">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="organism.n.02" label="organism">
+        <attvalues>
+          <attvalue for="0" value="organism" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a system considered analogous in structure or function to a living body" />
+        </attvalues>
+      </node>
+      <node id="plant.n.01" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant,works,industrial_plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="buildings for carrying on industrial labor" />
+        </attvalues>
+      </node>
+      <node id="plant" label="plant">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="plant.n.02" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant,flora,plant_life" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(botany) a living organism lacking the power of locomotion" />
+        </attvalues>
+      </node>
+      <node id="hood.n.09" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood,bonnet,cowl,cowling" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="protective covering consisting of a metal part that covers the engine" />
+        </attvalues>
+      </node>
+      <node id="establish.v.02" label="establish">
+        <attvalues>
+          <attvalue for="0" value="establish,found,plant,constitute,institute" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="set up or lay the groundwork for" />
+        </attvalues>
+      </node>
+      <node id="hood.n.07" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the folding roof of a carriage" />
+        </attvalues>
+      </node>
+      <node id="tree.v.03" label="tree">
+        <attvalues>
+          <attvalue for="0" value="tree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="chase an animal up a tree" />
+        </attvalues>
+      </node>
+      <node id="along.r.01" label="along">
+        <attvalues>
+          <attvalue for="0" value="along,on" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="with a forward motion" />
+        </attvalues>
+      </node>
+      <node id="tree.v.02" label="tree">
+        <attvalues>
+          <attvalue for="0" value="tree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="plant with trees" />
+        </attvalues>
+      </node>
+      <node id="cost.v.01" label="cost">
+        <attvalues>
+          <attvalue for="0" value="cost,be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="be priced at" />
+        </attvalues>
+      </node>
+      <node id="hood.n.01" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood,hoodlum,goon,punk,thug,tough,toughie,strong-armer" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="an aggressive and violent young criminal" />
+        </attvalues>
+      </node>
+      <node id="hood.n.03" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(slang) a neighborhood" />
+        </attvalues>
+      </node>
+      <node id="tree.v.04" label="tree">
+        <attvalues>
+          <attvalue for="0" value="tree,shoetree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="stretch (a shoe) on a shoetree" />
+        </attvalues>
+      </node>
+      <node id="tree.n.03" label="tree">
+        <attvalues>
+          <attvalue for="0" value="Tree,Sir_Herbert_Beerbohm_Tree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="English actor and theatrical producer noted for his lavish productions of Shakespeare (1853-1917)" />
+        </attvalues>
+      </node>
+      <node id="tree.n.02" label="tree">
+        <attvalues>
+          <attvalue for="0" value="tree,tree_diagram" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a figure that branches from a single root" />
+        </attvalues>
+      </node>
+      <node id="tree.n.01" label="tree">
+        <attvalues>
+          <attvalue for="0" value="tree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms" />
+        </attvalues>
+      </node>
+      <node id="inch.n.01" label="inch">
+        <attvalues>
+          <attvalue for="0" value="inch,in" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a unit of length equal to one twelfth of a foot" />
+        </attvalues>
+      </node>
+      <node id="on.r.02" label="on">
+        <attvalues>
+          <attvalue for="0" value="on" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="indicates continuity or persistence or concentration" />
+        </attvalues>
+      </node>
+      <node id="trunk" label="trunk">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="in.s.01" label="in">
+        <attvalues>
+          <attvalue for="0" value="in" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="s" />
+          <attvalue for="3" value="holding office" />
+        </attvalues>
+      </node>
+      <node id="embody.v.02" label="embody">
+        <attvalues>
+          <attvalue for="0" value="embody,be,personify" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="represent, as of a character on stage" />
+        </attvalues>
+      </node>
+      <node id="in.s.03" label="in">
+        <attvalues>
+          <attvalue for="0" value="in" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="s" />
+          <attvalue for="3" value="currently fashionable" />
+        </attvalues>
+      </node>
+      <node id="hood.n.02" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood,cap" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="a protective covering that is part of a plant" />
+        </attvalues>
+      </node>
+      <node id="by" label="by">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="a" label="a">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="on" label="on">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="aside.r.06" label="aside">
+        <attvalues>
+          <attvalue for="0" value="aside,by,away" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="r" />
+          <attvalue for="3" value="in reserve; not for immediate use" />
+        </attvalues>
+      </node>
+      <node id="be.v.03" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="occupy a certain position or area; be somewhere" />
+        </attvalues>
+      </node>
+      <node id="in" label="in">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="organism" label="organism">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="hood.n.06" label="hood">
+        <attvalues>
+          <attvalue for="0" value="hood,exhaust_hood" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="metal covering leading to a vent that exhausts smoke or fumes" />
+        </attvalues>
+      </node>
+      <node id="tree" label="tree">
+        <attvalues>
+          <attvalue for="1" value="word" />
+        </attvalues>
+      </node>
+      <node id="be.v.05" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="happen, occur, take place; this was during the visit to my parents' house&quot;" />
+        </attvalues>
+      </node>
+      <node id="be.v.08" label="be">
+        <attvalues>
+          <attvalue for="0" value="be,follow" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="work in a specific place, with a specific subject, or in a specific function" />
+        </attvalues>
+      </node>
+      <node id="corner.v.02" label="corner">
+        <attvalues>
+          <attvalue for="0" value="corner,tree" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="force a person or an animal into a position from which he cannot escape" />
+        </attvalues>
+      </node>
+      <node id="plantae.n.01" label="plantae">
+        <attvalues>
+          <attvalue for="0" value="Plantae,kingdom_Plantae,plant_kingdom" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(botany) the taxonomic kingdom comprising all living or extinct plants" />
+        </attvalues>
+      </node>
+      <node id="luggage_compartment.n.01" label="luggage compartment">
+        <attvalues>
+          <attvalue for="0" value="luggage_compartment,automobile_trunk,trunk" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="compartment in an automobile that carries luggage or shopping or tools" />
+        </attvalues>
+      </node>
+      <node id="exist.v.01" label="exist">
+        <attvalues>
+          <attvalue for="0" value="exist,be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="have an existence, be extant" />
+        </attvalues>
+      </node>
+      <node id="ampere.n.02" label="ampere">
+        <attvalues>
+          <attvalue for="0" value="ampere,amp,A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the basic unit of electric current adopted under the Systeme International d'Unites" />
+        </attvalues>
+      </node>
+      <node id="plant.v.01" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant,set" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="put or set (seeds, seedlings, or plants) into the ground" />
+        </attvalues>
+      </node>
+      <node id="be.v.01" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="have the quality of being; (copula, used with an adjective or a predicate noun)" />
+        </attvalues>
+      </node>
+      <node id="be.v.02" label="be">
+        <attvalues>
+          <attvalue for="0" value="be" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="be identical to; be someone or something" />
+        </attvalues>
+      </node>
+      <node id="adenine.n.01" label="adenine">
+        <attvalues>
+          <attvalue for="0" value="adenine,A" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="(biochemistry) purine base found in DNA and RNA; pairs with thymine in DNA and with uracil in RNA" />
+        </attvalues>
+      </node>
+      <node id="plant.v.05" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="place something or someone in a certain position in order to secretly observe or deceive" />
+        </attvalues>
+      </node>
+      <node id="plant.v.04" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="place into a river" />
+        </attvalues>
+      </node>
+      <node id="torso.n.01" label="torso">
+        <attvalues>
+          <attvalue for="0" value="torso,trunk,body" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="n" />
+          <attvalue for="3" value="the body excluding the head and neck and limbs" />
+        </attvalues>
+      </node>
+      <node id="plant.v.06" label="plant">
+        <attvalues>
+          <attvalue for="0" value="plant,implant" />
+          <attvalue for="1" value="synset" />
+          <attvalue for="2" value="v" />
+          <attvalue for="3" value="put firmly in the mind" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="is" target="constitute.v.01" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="1" source="is" target="be.v.10" weight="360.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="2" source="is" target="equal.v.01" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="3" source="is" target="cost.v.01" weight="409.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="4" source="is" target="be.v.11" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="5" source="is" target="be.v.08" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="6" source="is" target="be.v.12" weight="360.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="7" source="is" target="embody.v.02" weight="216.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="8" source="is" target="be.v.01" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="9" source="is" target="be.v.02" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="10" source="is" target="be.v.03" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="11" source="is" target="be.v.05" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="12" source="is" target="exist.v.01" weight="441.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="13" source="trunk.n.01" target="tree.n.01" weight="422.0">
+        <attvalues>
+          <attvalue for="4" value="is_part_of" />
+        </attvalues>
+      </edge>
+      <edge id="14" source="hood" target="hood.n.09" weight="546.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="15" source="hood" target="hood.n.08" weight="512.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="16" source="hood" target="hood.n.05" weight="560.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="17" source="hood" target="hood.n.04" weight="378.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="18" source="hood" target="hood.n.07" weight="523.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="19" source="hood" target="hood.n.06" weight="560.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="20" source="hood" target="hood.n.01" weight="387.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="21" source="hood" target="hood.n.03" weight="210.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="22" source="hood" target="hood.n.02" weight="464.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="23" source="hood" target="hood.n.10" weight="315.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="24" source="hood" target="hood.v.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="25" source="plantae" target="plantae.n.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="26" source="plant" target="plant.n.01" weight="293.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="27" source="plant" target="plant.n.03" weight="300.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="28" source="plant" target="plant.n.02" weight="325.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="29" source="plant" target="plant.n.04" weight="204.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="30" source="plant" target="implant.v.01" weight="601.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="31" source="plant" target="plant.v.01" weight="652.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="32" source="plant" target="plant.v.06" weight="594.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="33" source="plant" target="plant.v.05" weight="652.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="34" source="plant" target="plant.v.04" weight="594.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="35" source="plant" target="establish.v.02" weight="601.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="36" source="plant.n.02" target="plantae.n.01" weight="143.0">
+        <attvalues>
+          <attvalue for="4" value="member_of" />
+        </attvalues>
+      </edge>
+      <edge id="37" source="plant.n.02" target="organism.n.01" weight="924.0">
+        <attvalues>
+          <attvalue for="4" value="is_a" />
+        </attvalues>
+      </edge>
+      <edge id="38" source="tree.v.02" target="plant.v.01" weight="858.0">
+        <attvalues>
+          <attvalue for="4" value="is_a" />
+        </attvalues>
+      </edge>
+      <edge id="39" source="cost.v.01" target="be.v.01" weight="400.0">
+        <attvalues>
+          <attvalue for="4" value="is_a" />
+        </attvalues>
+      </edge>
+      <edge id="40" source="trunk" target="proboscis.n.02" weight="435.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="41" source="trunk" target="luggage_compartment.n.01" weight="473.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="42" source="trunk" target="trunk.n.02" weight="473.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="43" source="trunk" target="torso.n.01" weight="472.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="44" source="trunk" target="trunk.n.01" weight="463.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="45" source="hood.n.02" target="plant.n.02" weight="572.0">
+        <attvalues>
+          <attvalue for="4" value="is_part_of" />
+        </attvalues>
+      </edge>
+      <edge id="46" source="by" target="by.r.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="47" source="by" target="aside.r.06" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="48" source="a" target="vitamin_a.n.01" weight="329.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="49" source="a" target="angstrom.n.01" weight="374.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="50" source="a" target="deoxyadenosine_monophosphate.n.01" weight="422.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="51" source="a" target="ampere.n.02" weight="374.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="52" source="a" target="a.n.07" weight="391.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="53" source="a" target="a.n.06" weight="313.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="54" source="a" target="adenine.n.01" weight="431.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="55" source="on" target="along.r.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="56" source="on" target="on.r.03" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="57" source="on" target="on.a.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="58" source="on" target="on.r.02" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="59" source="on" target="on.a.02" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="60" source="in" target="indium.n.01" weight="787.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="61" source="in" target="in.r.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="62" source="in" target="indiana.n.01" weight="765.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="63" source="in" target="inch.n.01" weight="770.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="64" source="in" target="in.s.01" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="65" source="in" target="in.s.03" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="66" source="in" target="in.s.02" weight="1000.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="67" source="organism" target="organism.n.02" weight="591.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="68" source="organism" target="organism.n.01" weight="591.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="69" source="tree" target="tree.v.03" weight="658.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="70" source="tree" target="tree.v.02" weight="658.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="71" source="tree" target="corner.v.02" weight="664.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="72" source="tree" target="tree.v.04" weight="652.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="73" source="tree" target="tree.n.03" weight="321.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="74" source="tree" target="tree.n.02" weight="268.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+      <edge id="75" source="tree" target="tree.n.01" weight="314.0">
+        <attvalues>
+          <attvalue for="4" value="belongs_to_synset" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
