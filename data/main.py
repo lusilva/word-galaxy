@@ -6,10 +6,10 @@ import networkx as nx
 
 
 def main():
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    logging.basicConfig(stream=sys.stderr, level=logging.ERROR)
 
     # Set to either google-10000 or small-data
-    data_file = 'small-data'
+    data_file = 'google-1000'
 
     # create a set of words from the input file
     word_set = set()
