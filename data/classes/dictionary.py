@@ -12,6 +12,7 @@ class Dictionary(object):
     layout = dict()
     words_to_synsets = dict()
     synsets_to_words = dict()
+    info_dict = dict()
 
     def __init__(self, words=None):
         if words is None:
@@ -22,13 +23,32 @@ class Dictionary(object):
     def __construct_all_synsets(self):
         for pos in ['a', 's', 'r', 'n', 'v']:
             for synset in list(wn.all_synsets(pos)):
-                name, tense = self.__parse_synset_name_and_tense(synset.name())
+                name, tense = self.__parse_synset_name_and_tense(str(synset.name()))
+                info = dict()
+                info['tense'] = str(tense)
+                info['definition'] = str(synset.definition())
+                info['id'] = str(synset.name())
+
                 if name in self.words_to_synsets:
-                    self.words_to_synsets[name].add(synset.name())
+                    self.info_dict[name].append(info)
+                    self.words_to_synsets[name].add(synset)
                 else:
-                    self.words_to_synsets[name] = {synset.name()}
-        word = Word('node')
-        print word.synsets
+                    self.info_dict[name] = [info]
+                    self.words_to_synsets[name] = {synset}
+
+                self.synsets_to_words[synset] = {name}
+
+        for synset in self.words_to_synsets:
+            self.graph.add_node(synset, data=self.info_dict[synset])
+
+        self.__connect_hypernyms()
+
+        self.__connect_member_holonyms()
+
+        self.__connect_part_meronyms()
+
+        print len(self.graph.nodes())
+        print len(self.graph.edges())
 
     def __construct_from_words(self, words):
         for raw_word in words:
@@ -67,11 +87,10 @@ class Dictionary(object):
                     if weight > 0:
                         self.graph.add_edge(from_word, to_word, relation='lemma', weight=weight)
 
-    @staticmethod
-    def __determine_weight(from_word, to_word):
-        from_synsets = Word(from_word).synsets
-        to_synsets = Word(to_word).synsets
-        weight = from_synsets[0].path_similarity(to_synsets[0], simulate_root=False)
+    def __determine_weight(self, from_word, to_word):
+        from_synsets = self.words_to_synsets[from_word]
+        to_synsets = self.words_to_synsets[to_word]
+        weight = list(from_synsets)[0].path_similarity(list(to_synsets)[0], simulate_root=False)
         # for from_synset_index in range(0, len(from_synsets)):
         #     for to_synset_index in range(0, len(to_synsets)):
         #         from_synset = from_synsets[from_synset_index]
@@ -162,6 +181,8 @@ class Dictionary(object):
                         logging.debug(from_node + ' ---' + relation + '--> ' + to_node)
                         weight = self.__determine_weight(from_node, to_node)
                         if weight == 0:
+                            continue
+                        if from_node == to_node or ((from_node in self.graph) and (to_node in self.graph[from_node])):
                             continue
                         self.graph.add_edge(from_node,
                                             to_node,

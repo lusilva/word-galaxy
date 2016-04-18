@@ -6,16 +6,16 @@ import networkx as nx
 
 
 def main():
-    logging.basicConfig(stream=sys.stderr, level=logging.ERROR)
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     # Set to either google-10000 or small-data
-    data_file = 'google-1000'
+    data_file = 'all-synsets'
 
     # create a set of words from the input file
-    word_set = set()
-    with open(data_file + '.txt') as f:
-        for word in f:
-            word_set.add(word.rstrip())
+    # word_set = set()
+    # with open(data_file + '.txt') as f:
+    #     for word in f:
+    #         word_set.add(word.rstrip())
 
     # create a new dictionary with the words
     dictionary = Dictionary()

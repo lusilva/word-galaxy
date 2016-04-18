@@ -6,7 +6,7 @@ import createGraph from 'ngraph.graph';
 Meteor.methods({
   calculateLayout: function() {
 
-    HTTP.get(Meteor.absoluteUrl('/generated-google-10000.json'), function(err, result) {
+    HTTP.get(Meteor.absoluteUrl('/generated-all-synsets.json'), function(err, result) {
       if (!err && result.data) {
 
         let data = result.data;

@@ -132,8 +132,8 @@ export default class MainGraph extends React.Component {
       link: function createLinkUI(link) {
         if (link.data && link.data.hidden)
           return {
-            fromColor: 0x000000,
-            toColor: 0x000000
+            fromColor: 0xFFFFFF,
+            toColor: 0xFFFFFF
           }; // don't need to render!
         // otherwise return default link:
         return {
@@ -157,8 +157,8 @@ export default class MainGraph extends React.Component {
         while (shownLinks.length > 0) {
           let link = shownLinks.pop();
           let ui = this.renderer.getLink(link.id);
-          ui.fromColor = 0x000000;
-          ui.toColor = 0x000000;
+          ui.fromColor = 0xFFFFFF;
+          ui.toColor = 0xFFFFFF;
         }
       }
     }.bind(this));
