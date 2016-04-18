@@ -18,7 +18,6 @@
     "pixel.static": "^2.1.1",
     "react": "~0.14.1",
     "react-mixin": "^3.0.3",
-    "react-sidebar": "^2.1.1",
     "tap": "^5.7.1"
   },
   "devDependencies": {
