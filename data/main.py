@@ -18,13 +18,12 @@ def main():
             word_set.add(word.rstrip())
 
     # create a new dictionary with the words
-    dictionary = Dictionary(word_set)
+    dictionary = Dictionary()
     graph = dictionary.get_graph()
     # dictionary.calculate_spring_layout(100)
     # plt.savefig("path.png")
-    # with open('../sigma/' + data_file + '.json', 'w') as outfile:
-    #     outfile.write(json.dumps(json_graph.node_link_data(graph)))
-    nx.write_gexf(graph, data_file + '.gexf')
+    with open('generated-' + data_file + '.json', 'w') as outfile:
+        outfile.write(json.dumps(json_graph.node_link_data(graph)))
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 from textblob import Word
+from nltk.corpus import wordnet as wn
 import networkx as nx
 import relations
 import logging
@@ -12,10 +13,24 @@ class Dictionary(object):
     words_to_synsets = dict()
     synsets_to_words = dict()
 
-    def __init__(self, words):
-        self.__construct(words)
+    def __init__(self, words=None):
+        if words is None:
+            self.__construct_all_synsets()
+        else:
+            self.__construct_from_words(words)
 
-    def __construct(self, words):
+    def __construct_all_synsets(self):
+        for pos in ['a', 's', 'r', 'n', 'v']:
+            for synset in list(wn.all_synsets(pos)):
+                name, tense = self.__parse_synset_name_and_tense(synset.name())
+                if name in self.words_to_synsets:
+                    self.words_to_synsets[name].add(synset.name())
+                else:
+                    self.words_to_synsets[name] = {synset.name()}
+        word = Word('node')
+        print word.synsets
+
+    def __construct_from_words(self, words):
         for raw_word in words:
             word = Word(raw_word)
             # If this word has no synsets, then go to next word
