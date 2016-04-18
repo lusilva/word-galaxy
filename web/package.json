@@ -18,7 +18,8 @@
     "pixel.static": "^2.1.1",
     "react": "~0.14.1",
     "react-mixin": "^3.0.3",
-    "tap": "^5.7.1"
+    "tap": "^5.7.1",
+    "wordnet-db": "^3.1.2"
   },
   "devDependencies": {
     "webpack": "^1.12.9",

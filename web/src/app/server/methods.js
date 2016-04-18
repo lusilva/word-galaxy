@@ -1,7 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import createLayout from './forceAtlas/layout';
+import WordNet from './wordnet/wordnet';
 import forceLayout3D from 'ngraph.forcelayout3d';
 import createGraph from 'ngraph.graph';
+
+const wordnet = new WordNet(process.cwd() + '/../web.browser/app/dict');
 
 Meteor.methods({
   calculateLayout: function() {
@@ -32,6 +35,27 @@ Meteor.methods({
         layout.run(true);
       }
     });
+  },
+  findSynsets: function(word){
+    var response = Async.runSync(function(done) {
+      wordnet.lookup(word, function(results){
+        // if there are no results
+        if(results.length === 0){
+          // render message saying no words were found for 'word'
+          done(null, null);
+        }
+        // console.log(JSON.stringify(results, null, '\t'));
+        let synsets = []
+        for(var i = 0; i < results.length; i++){
+          var synset = results[i];
+          // console.log(synset.lemma, synset.pos);
+          synsets.push(synset.lemma)
+        }
+        done(null, synsets);
+      });
+
+    });
+    return response.result;
   }
 });
 

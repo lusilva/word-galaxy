@@ -25,3 +25,4 @@ webpack:assets
 reactrouter:react-router-ssr
 nfl:react-helmet
 http
+meteorhacks:async
