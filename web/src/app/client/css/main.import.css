@@ -9,6 +9,7 @@ body {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    background-color: black;
 }
 
 #main-graph {
@@ -42,6 +43,7 @@ body {
     z-index: 100;
     width: 400px;
     height: 200px;
+    border: solid white;
 }
 
 .main-graph-container.mini #main-graph canvas {
@@ -56,6 +58,25 @@ body {
     right: 0 !important;
     width: 100% !important;
     height: 100% !important;
+}
+
+.slider {
+    overflow-y: hidden;
+    max-height: 500px; /* approximate max height */
+    z-index: 1000;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slider.closed {
+    max-height: 0;
 }
 
 .search-box {

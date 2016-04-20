@@ -3,6 +3,10 @@ import createLayout from './forceAtlas/layout';
 import WordNet from './wordnet/wordnet';
 import forceLayout3D from 'ngraph.forcelayout3d';
 import createGraph from 'ngraph.graph';
+import createWhisper from 'ngraph.cw';
+import coarsen from 'ngraph.coarsen';
+import kruskal from 'ngraph.kruskal';
+import centrality from 'ngraph.centrality';
 
 const wordnet = new WordNet(process.cwd() + '/../web.browser/app/dict');
 
@@ -16,7 +20,7 @@ Meteor.methods({
 
         let graph = load(data,
           function(node) {
-            return {id: node["id"]};
+            return {id: node["id"], data: node['data']};
           },
           function(link) {
             return {
@@ -25,31 +29,74 @@ Meteor.methods({
             };
           });
 
-        let layout = createLayout(graph, {
-          iterations: 200,
+        //console.log('calculating bc');
+        //var directedBetweenness = centrality.betweenness(graph, true);
+        //console.log(directedBetweenness);
+
+        var whisper = createWhisper(graph);
+        var requiredChangeRate = 0; // 0 is complete convergence
+        while (whisper.getChangeRate() > requiredChangeRate) {
+          whisper.step();
+        }
+        let coarseGraph = coarsen(graph, whisper);
+        let index = 0;
+        coarseGraph.forEachNode(function(node) {
+          node.data.forEach(function(id) {
+            coarseGraph.addNode(id, {hidden: true, data: graph.getNode(id).data});
+            coarseGraph.addLink(node.id, id);
+            index++;
+          });
+        });
+
+        console.log(coarseGraph.getLinksCount());
+
+        var path = kruskal(coarseGraph);
+
+        console.log(path.length);
+
+        let tree = createGraph();
+        coarseGraph.forEachNode(function(node) {
+          tree.addNode(node.id, node.data);
+        });
+        for (var i = 0; i < path.length; ++i) {
+          let edge = path[i];
+          tree.addLink(edge.fromId, edge.toId);
+        }
+
+        let layout = createLayout(tree, {
+          iterations: 25,
           saveEach: 25,
           layout: forceLayout3D.bind(this, graph, {
-            gravity: -1.2
+            springLength: 30,
+            springCoeff: 0.0008,
+            gravity: -2,
+            theta: 0.8,
+            dragCoeff: 0.00001
           })
         });
         layout.run(true);
       }
     });
   },
-  findSynsets: function(word){
+  findSynsets: function(word) {
     var response = Async.runSync(function(done) {
-      wordnet.lookup(word, function(results){
+      wordnet.lookup(word, function(results) {
         // if there are no results
-        if(results.length === 0){
+        if (results.length === 0) {
           // render message saying no words were found for 'word'
           done(null, null);
         }
         // console.log(JSON.stringify(results, null, '\t'));
-        let synsets = []
-        for(var i = 0; i < results.length; i++){
+        let synsets = [];
+        for (var i = 0; i < results.length; i++) {
           var synset = results[i];
           // console.log(synset.lemma, synset.pos);
-          synsets.push(synset.lemma)
+          synsets.push({
+            name: synset.lemma,
+            definition: synset.def,
+            synonyms: synset.synonyms,
+            pos: synset.pos
+          });
         }
         done(null, synsets);
       });

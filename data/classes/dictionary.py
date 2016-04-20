@@ -28,24 +28,25 @@ class Dictionary(object):
                 info['tense'] = str(tense)
                 info['definition'] = str(synset.definition())
                 info['id'] = str(synset.name())
+                key = name + ' (' + tense + ')'
 
-                if name in self.words_to_synsets:
-                    self.info_dict[name].append(info)
-                    self.words_to_synsets[name].add(synset)
+                if key in self.words_to_synsets:
+                    self.info_dict[key].append(info)
+                    self.words_to_synsets[key].add(synset)
                 else:
-                    self.info_dict[name] = [info]
-                    self.words_to_synsets[name] = {synset}
+                    self.info_dict[key] = [info]
+                    self.words_to_synsets[key] = {synset}
 
-                self.synsets_to_words[synset] = {name}
+                self.synsets_to_words[synset] = {key}
 
-        for synset in self.words_to_synsets:
-            self.graph.add_node(synset, data=self.info_dict[synset])
+        for key in self.words_to_synsets:
+            self.graph.add_node(key, data=self.info_dict[key])
 
         self.__connect_hypernyms()
 
-        self.__connect_member_holonyms()
-
-        self.__connect_part_meronyms()
+        # self.__connect_member_holonyms()
+        #
+        # self.__connect_part_meronyms()
 
         print len(self.graph.nodes())
         print len(self.graph.edges())
@@ -178,12 +179,12 @@ class Dictionary(object):
                         if inverse:
                             from_node = related_word
                             to_node = word
-                        logging.debug(from_node + ' ---' + relation + '--> ' + to_node)
                         weight = self.__determine_weight(from_node, to_node)
-                        if weight == 0:
+                        if weight < 0.1:
                             continue
                         if from_node == to_node or ((from_node in self.graph) and (to_node in self.graph[from_node])):
                             continue
+                        logging.debug(from_node + ' ---' + relation + '--> ' + to_node + ' (' + str(weight) + ')')
                         self.graph.add_edge(from_node,
                                             to_node,
                                             relation=relation,
