@@ -12,7 +12,7 @@ export default function createLayout(graph, options) {
   var coordinatesPerRecord = is2d ? 2 : 3;
   var intSize = 4;
   var layouter = is2d ? layout3d.get2dLayout : layout3d;
-  var layout = layouter(graph);
+  var layout = layouter(graph, options.physicsSettings);
   var outDir = process.env["PWD"] + "/public/data";
 
   if (!fs.existsSync(outDir)) {

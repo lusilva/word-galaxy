@@ -51,6 +51,9 @@ export default class MainGraph extends React.Component {
     outLinks[0] = lastArray;
     var i, j, srcIndex;
 
+    let total = 0;
+    let hidden = 0;
+
     for (i = 0; i < links.length; ++i) {
       let link = links[i];
 
@@ -74,13 +77,20 @@ export default class MainGraph extends React.Component {
         continue;
       for (j = 0; j < inLinks[i].length; ++j) {
 
-        let fromId = this.labels[inLinks[i][j]].id;
-        let toId = this.labels[i].id;
+        let to = this.graph.getNode(this.labels[inLinks[i][j]].id);
+        let from = this.graph.getNode(this.labels[i].id);
 
-        this.graph.addLink(fromId, toId);
+        //console.log([to.data.cluster, from.data.cluster]);
+        if (from.data.cluster !== to.data.cluster) {
+          hidden++;
+        }
+        this.graph.addLink(from.id, to.id, {hidden: from.data.cluster !== to.data.cluster});
+        total++;
       }
     }
     this.graph.endUpdate();
+
+    console.log({hidden, total});
 
     this._renderGraph();
   };
@@ -98,17 +108,26 @@ export default class MainGraph extends React.Component {
 
       let label = this.labels[node];
       if (label.data.hidden) {
-        this.graph.addNode(label.id, {x, y, z, data: label.data, hidden: true});
+        console.log('adding hidden node!');
+        this.graph.addNode(label.id, merge_options({x, y, z, hidden: true}, label.data));
       } else {
-        let words = this.labels[node].data;
-        let id = words[0] + ' (' + words.length + ' clustered)';
-        this.labels[node].id = id;
-        for (var j = 0; j < words.length; ++j) {
-          this.wordClusterMap[words[j]] = id;
-        }
-        this.graph.addNode(id, {x, y, z, data: this.labels[node].data, hidden: false});
+        //console.log(merge_options({x, y, z, hidden: false}, label.data));
+        this.graph.addNode(label.id, merge_options({x, y, z, hidden: false}, label.data));
       }
       node += 1;
+    }
+
+
+    function merge_options(obj1, obj2) {
+      var obj3 = {};
+      var attrname;
+      for (attrname in obj1) {
+        if (obj1.hasOwnProperty(attrname)) obj3[attrname] = obj1[attrname];
+      }
+      for (attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname)) obj3[attrname] = obj2[attrname];
+      }
+      return obj3;
     }
 
     this._loadLinks();
@@ -204,6 +223,9 @@ export default class MainGraph extends React.Component {
       initPosition: this._getNodePosition.bind(this),
       autoFit: false,
       link: function createLinkUI(link) {
+        if (link.data && link.data.hidden)
+          return;
+
         return {
           fromColor: 0x808080,
           toColor: 0x808080
@@ -222,6 +244,7 @@ export default class MainGraph extends React.Component {
 
     this.renderer.on('nodehover', function(node) {
       if (node) {
+        this._clearSelected();
         this._selectNode(node);
       } else {
         this._clearSelected();

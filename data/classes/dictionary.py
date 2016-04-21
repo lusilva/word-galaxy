@@ -28,7 +28,7 @@ class Dictionary(object):
                 info['tense'] = str(tense)
                 info['definition'] = str(synset.definition())
                 info['id'] = str(synset.name())
-                key = name + ' (' + tense + ')'
+                key = name
 
                 if key in self.words_to_synsets:
                     self.info_dict[key].append(info)
