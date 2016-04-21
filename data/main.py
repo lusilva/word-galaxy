@@ -6,9 +6,11 @@ import networkx as nx
 
 
 def main():
+    # log debug messages to standard error
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     # Set to either google-10000 or small-data
+    # output file for
     data_file = 'all-synsets'
 
     # create a set of words from the input file

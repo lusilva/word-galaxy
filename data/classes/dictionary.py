@@ -6,13 +6,15 @@ import logging
 import math
 import string
 
-
+# class that is used to store dictionary of words
 class Dictionary(object):
-    graph = nx.DiGraph()
-    layout = dict()
-    words_to_synsets = dict()
-    synsets_to_words = dict()
-    info_dict = dict()
+    """class that is used to store dictionary of words"""
+    # class attributes
+    graph = nx.DiGraph() # graph of words
+    layout = {} # map nodes to positions
+    words_to_synsets = {} # map words to the synsets they belong to
+    synsets_to_words = {} # reverse of the above
+    info_dict = {} # map words to tense, definition, id
 
     def __init__(self, words=None):
         if words is None:
@@ -21,26 +23,28 @@ class Dictionary(object):
             self.__construct_from_words(words)
 
     def __construct_all_synsets(self):
+        # for each of the parts of speach
         for pos in ['a', 's', 'r', 'n', 'v']:
-            for synset in list(wn.all_synsets(pos)):
+            # wn.all_synsets is a generator for each part of speach
+            for synset in wn.all_synsets(pos):
                 name, tense = self.__parse_synset_name_and_tense(str(synset.name()))
-                info = dict()
+
+                # convert unicode objects to string
+                # and store in information dictionary
+                info = {}
                 info['tense'] = str(tense)
+                # potentially use .encode('utf-8')
                 info['definition'] = str(synset.definition())
                 info['id'] = str(synset.name())
-                key = name
 
-                if key in self.words_to_synsets:
-                    self.info_dict[key].append(info)
-                    self.words_to_synsets[key].add(synset)
-                else:
-                    self.info_dict[key] = [info]
-                    self.words_to_synsets[key] = {synset}
+                # store info_dict, words_to_synsets, synsets_to_words
+                self.info_dict.setdefault(name, []).append(info)
+                self.words_to_synsets.setdefault(name, set()).add(synset)
+                self.synsets_to_words[synset] = {name}
 
-                self.synsets_to_words[synset] = {key}
-
-        for key in self.words_to_synsets:
-            self.graph.add_node(key, data=self.info_dict[key])
+        for word in self.words_to_synsets:
+            # data is the dictionary stored for each word
+            self.graph.add_node(word, data=self.info_dict[word])
 
         self.__connect_hypernyms()
 
@@ -48,8 +52,9 @@ class Dictionary(object):
         #
         # self.__connect_part_meronyms()
 
-        print len(self.graph.nodes())
-        print len(self.graph.edges())
+        # print all nodes and edges after
+        print "Nodes: {}" % len(self.graph.nodes())
+        print "Edges: {}" % len(self.graph.edges())
 
     def __construct_from_words(self, words):
         for raw_word in words:
@@ -91,6 +96,7 @@ class Dictionary(object):
     def __determine_weight(self, from_word, to_word):
         from_synsets = self.words_to_synsets[from_word]
         to_synsets = self.words_to_synsets[to_word]
+        # return a score denoting how similar two word senses are
         weight = list(from_synsets)[0].path_similarity(list(to_synsets)[0], simulate_root=False)
         # for from_synset_index in range(0, len(from_synsets)):
         #     for to_synset_index in range(0, len(to_synsets)):
@@ -101,14 +107,14 @@ class Dictionary(object):
         #             weight += 1
         #         else:
         #             weight += (from_synset.path_similarity(to_synset) or 0)
-        return weight or 0
+        return weight # or 0 # will always return 0 to 1
 
     def __add_word_node(self, raw_word, word):
-        self.words_to_synsets[raw_word] = set()
+        # self.words_to_synsets[raw_word] = set()
         definitions = []
         for synset in word.synsets:
             name, tense = self.__parse_synset_name_and_tense(synset.name())
-            definition = dict()
+            definition = {}
             definition['synset'] = str(synset.name())
             definition['name'] = str(name)
             definition['tense'] = str(tense)
@@ -116,12 +122,10 @@ class Dictionary(object):
             definition['synonyms'] = ', '.join(map(str, synset.lemma_names())).replace('_', ' ')
             definitions.append(definition)
 
-            if synset in self.synsets_to_words:
-                self.synsets_to_words[synset].add(raw_word)
-            else:
-                self.synsets_to_words[synset] = {raw_word}
+            self.synsets_to_words.setdefault(synset, set()).add(raw_word)
 
             self.words_to_synsets[raw_word].add(synset)
+
 
         self.graph.add_node(raw_word, label=raw_word, definitions=str(definitions))
 
@@ -129,9 +133,10 @@ class Dictionary(object):
         return self.graph
 
     def calculate_spring_layout(self, scale):
-        layout = nx.spring_layout(self.graph, scale=scale, weight='weight')
-        for node in layout:
-            coords = layout[node]
+        """Use Fruchterman-Reingold force-directed algorithm"""
+        layout = nx.spring_layout(self.graph, scale=scale)
+        print layout
+        for node, coords in layout.iteritems:
             self.graph.node[node]['x'] = "{0:.2f}".format(round(coords[0], 2))
             self.graph.node[node]['y'] = "{0:.2f}".format(round(coords[1], 2))
 
@@ -165,13 +170,24 @@ class Dictionary(object):
         self.__connect_relation(relations.PART_MERONYM, True)
 
     def __connect_relation(self, relation, inverse=False):
+        """connect words in a graph
+        based on the relation specified
+        """
+        # for each word
         for word in self.words_to_synsets:
+            # for each synset a word belongs to
             for synset in self.words_to_synsets[word]:
+                # get the related synset of the current synset in iteration
                 related_synsets = self.__get_related_synsets(synset, relation)
                 for related_synset in related_synsets:
-                    if related_synset not in self.synsets_to_words:
+                    # if we don't have words for that synset
+                    # related_synset not in self.synsets_to_words:
+                    #     continue
+                    related_words = self.synsets_to_words.get(related_synset, None)
+                    if related_words == None:
                         continue
-                    for related_word in self.synsets_to_words[related_synset]:
+                    for related_word in related_words:
+                        # don't add the same
                         if related_word == word:
                             continue
                         from_node = word
@@ -179,6 +195,7 @@ class Dictionary(object):
                         if inverse:
                             from_node = related_word
                             to_node = word
+                        # weight
                         weight = self.__determine_weight(from_node, to_node)
                         if weight < 0.1:
                             continue
@@ -192,6 +209,9 @@ class Dictionary(object):
 
     @staticmethod
     def __get_related_synsets(synset, relation):
+        """return the related synset of a synset
+        given the relation
+        """
         if relation == relations.HYPERNYM:
             return set(synset.hypernyms())
         elif relation == relations.MEMBER_HOLONYM:
