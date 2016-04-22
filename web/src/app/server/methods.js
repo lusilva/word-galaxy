@@ -14,20 +14,25 @@ let graph = null;
 let iterations = 100;
 
 Meteor.methods({
+  // calculate the layout of the graph before serving it to the client
   calculateLayout: function() {
 
     iterations += 100;
 
+    // if the graph hasn't been created
+    // load the data set
     if (!graph) {
       HTTP.get(Meteor.absoluteUrl('/generated-all-synsets.json'), function(err, result) {
+        // if we don't have an er
         if (!err && result.data) {
-
           let data = result.data;
-
+          // call the load function w/ graph data in json,
           let graph = load(data,
+            // function that returns object w/ id and info_dict[word] from python,
             function(node) {
               return {id: node["id"], data: node['data']};
             },
+            // function that links two nodes
             function(link) {
               return {
                 fromId: data.nodes[link.source].id,
@@ -42,10 +47,13 @@ Meteor.methods({
       graphCallback(graph, false);
     }
 
-
+    // pass the graph that was created in ngraph
+    // we don't want to overwrite the previous iterations
     function graphCallback(graph, overwrite) {
+      // create instance of ngraph.graph w/ chinese whispers graph clustering algorithm
       var whisper = createWhisper(graph);
       var requiredChangeRate = 0; // 0 is complete convergence
+      //
       while (whisper.getChangeRate() > requiredChangeRate) {
         whisper.step();
       }
@@ -60,10 +68,11 @@ Meteor.methods({
       //});
 
       var clusters = whisper.createClusterMap();
+      // removeLinks for removing links in the graph
       var removedLinks = [];
 
+      // use forEach to remove links and cluster
       clusters.forEach(visitCluster);
-
 
       function visitCluster(clusterNodes, clusterClass) {
         var i;
@@ -76,6 +85,8 @@ Meteor.methods({
           let node = graph.getNode(clusterNodes[i]);
           graph.forEachLinkedNode(node.id,
             function(linkedNode, link) {
+              // if the clusters are not the same
+              // we remove the link from the graph
               if (linkedNode.data.cluster != node.data.cluster) {
                 graph.removeLink(link);
                 removedLinks.push(link);
@@ -102,7 +113,7 @@ Meteor.methods({
           removedLinks.push(removedThisIteration[i]);
         }
       }
-
+      // print each connection in the graph w/o being in the same cluster
       graph.forEachLink(function(link) {
         let from = graph.getNode(link.fromId);
         let to = graph.getNode(link.toId);
@@ -110,7 +121,6 @@ Meteor.methods({
           console.log({from: from.data.cluster, to: to.data.cluster});
         }
       });
-
 
       console.log(removedLinks.length);
 
@@ -166,34 +176,43 @@ Meteor.methods({
   }
 });
 
-
+// jsonGraph is the file created in python
+// nodeTransform is a function that operates
+// linkTransform
 function load(jsonGraph, nodeTransform, linkTransform) {
+  // stored used to store jsonGraph
   var stored;
   nodeTransform = nodeTransform || id;
   linkTransform = linkTransform || id;
+  // either parse the json string to a json object
   if (typeof jsonGraph === 'string') {
     stored = JSON.parse(jsonGraph);
   } else {
     stored = jsonGraph;
   }
 
-  var graph = createGraph(),
-    i;
+  // create an empty ngraph.graph
+  var graph = createGraph(), i;
 
   if (stored.links === undefined || stored.nodes === undefined) {
     throw new Error('Cannot load graph without links and nodes');
   }
 
+
   for (i = 0; i < stored.nodes.length; ++i) {
+    // apply nodeTranform to each node
+    // ex: set to {id: node["id"], data: node['data']};
     var parsedNode = nodeTransform(stored.nodes[i]);
     if (!parsedNode.hasOwnProperty('id')) {
       throw new Error('Graph node format is invalid: Node id is missing');
     }
-
+    // add the node w/ id and parsedNode
     graph.addNode(parsedNode.id, parsedNode.data);
   }
 
   for (i = 0; i < stored.links.length; ++i) {
+    // apply linkTransform to each link
+    // ex: return fromId, toId for the two nodes
     var link = linkTransform(stored.links[i]);
     if (!link.hasOwnProperty('fromId') || !link.hasOwnProperty('toId')) {
       throw new Error('Graph link format is invalid. Both fromId and toId are required');
