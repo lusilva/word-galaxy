@@ -19,11 +19,13 @@
     "ngraph.louvain": "^1.0.0",
     "ngraph.offline.layout": "^1.1.1",
     "ngraph.pixel": "^2.1.0",
+    "ngraph.pixi": "0.0.3",
     "ngraph.tobinary": "git+https://github.com/lusilva/ngraph.tobinary.git",
     "path": "^0.12.7",
     "pixel.static": "^2.1.1",
     "react": "~0.14.1",
     "react-mixin": "^3.0.3",
+    "sigma": "git+https://github.com/jacomyal/sigma.js.git",
     "tap": "^5.7.1",
     "wordnet-db": "^3.1.2"
   },

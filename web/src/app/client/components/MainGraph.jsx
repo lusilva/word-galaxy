@@ -3,6 +3,8 @@ import createGraph from 'ngraph.graph';
 import renderGraph from 'ngraph.pixel';
 import staticLayout from 'pixel.static';
 import request from '../helpers/request';
+import TwoDGraph from './TwoDGraph';
+import $ from 'jquery';
 
 export default class MainGraph extends React.Component {
   state = {
@@ -14,7 +16,6 @@ export default class MainGraph extends React.Component {
   renderer = null;
   shownNodes = [];
   shownLinks = [];
-  wordClusterMap = {};
 
   componentDidMount() {
     this._loadLabels();
@@ -99,7 +100,7 @@ export default class MainGraph extends React.Component {
     let positions = new Int32Array(buffer);
     this.graph = createGraph();
     let node = 0;
-    let scaleFactor = 5;
+    let scaleFactor = 2;
 
     for (var i = 0; i < positions.length; i += 3) {
       let x = positions[i] * scaleFactor;
@@ -144,6 +145,8 @@ export default class MainGraph extends React.Component {
   };
 
   _enlargeGraph(showNodeId) {
+    this.setState({selectedNode: null});
+
     $('.main-graph-container').removeClass('mini');
     $('.mini-click-handler').off('click', false);
     this.renderer.focus();
@@ -178,13 +181,13 @@ export default class MainGraph extends React.Component {
   _selectNode(node) {
     let ui = this.renderer.getNode(node.id);
     this.shownNodes.push({id: node.id, size: ui.size, color: ui.color});
-    ui.size = 100;
+    ui.size = 40;
     ui.color = 0xFF0000;
     this.graph.forEachLinkedNode(node.id, function(linkedNode, link) {
       let nodeUI = this.renderer.getNode(linkedNode.id);
       if (nodeUI) {
         this.shownNodes.push({id: linkedNode.id, size: nodeUI.size, color: nodeUI.color});
-        nodeUI.size = 100;
+        nodeUI.size = 40;
         nodeUI.color = 0xFF0000;
       }
 
@@ -226,6 +229,8 @@ export default class MainGraph extends React.Component {
         if (link.data && link.data.hidden)
           return;
 
+        return;
+
         return {
           fromColor: 0x808080,
           toColor: 0x808080
@@ -252,13 +257,8 @@ export default class MainGraph extends React.Component {
     }.bind(this));
 
     this.renderer.on('nodedblclick', function(node) {
-      this._showCluster(node);
+      this._minifyGraph(node.id);
     }.bind(this));
-  };
-
-
-  _showCluster(node) {
-    this._minifyGraph(node.id);
   };
 
   _handleSearchSubmit(e) {
@@ -279,8 +279,6 @@ export default class MainGraph extends React.Component {
         return synset;
       });
 
-      let clusterId = this.wordClusterMap[synsets[0].name];
-
       let nodes = [];
       let hasNodes = {};
       for (var i = 0; i < synsets.length; ++i) {
@@ -297,7 +295,7 @@ export default class MainGraph extends React.Component {
       this.setState({
         selectedNode: {
           nodes,
-          centralNode: synsets
+          word
         }
       });
 
@@ -305,7 +303,7 @@ export default class MainGraph extends React.Component {
         let ui = this.renderer.getNode(this.shownNodes.pop().id);
         ui.size = 20;
       }
-      this._minifyGraph(clusterId);
+      this._minifyGraph(synsets[0].name);
 
     }.bind(this));
   };
@@ -319,10 +317,11 @@ export default class MainGraph extends React.Component {
           <label><span className="glyphicon glyphicon-search search-icon"/></label>
           <input type="submit" id="search-submit"/>
         </form>
-        {this.state.selectedNode ? 'Render 2D Graph for ' + this.state.selectedNode.id : null}
+        {this.state.selectedNode ?
+          <TwoDGraph largeGraph={this.graph} selectedNode={this.state.selectedNode}/> : null}
         <div id="main-graph"></div>
         <div className="mini-click-handler"></div>
-        <div className="slider">Hello</div>
+        <div id="graph-container"></div>
       </div>
     )
   }

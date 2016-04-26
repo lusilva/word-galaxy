@@ -11,13 +11,10 @@ import centrality from 'ngraph.centrality';
 const wordnet = new WordNet(process.cwd() + '/../web.browser/app/dict');
 
 let graph = null;
-let iterations = 100;
 
 Meteor.methods({
   // calculate the layout of the graph before serving it to the client
   calculateLayout: function() {
-
-    iterations += 100;
 
     // if the graph hasn't been created
     // load the data set
@@ -135,7 +132,7 @@ Meteor.methods({
       //}
 
       let layout = createLayout(graph, {
-        iterations: iterations,
+        iterations: 100,
         saveEach: 25,
         physicsSettings: {
           springLength: 100,
