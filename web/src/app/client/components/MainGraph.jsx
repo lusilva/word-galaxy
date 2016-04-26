@@ -149,6 +149,7 @@ export default class MainGraph extends React.Component {
 
     $('.main-graph-container').removeClass('mini');
     $('.mini-click-handler').off('click', false);
+    $('.main-graph-container canvas').attr('tabIndex', -1);
     this.renderer.focus();
 
     if (showNodeId && this.renderer.getNode(showNodeId)) {
@@ -163,6 +164,7 @@ export default class MainGraph extends React.Component {
 
   _minifyGraph(showNodeId) {
     $('.main-graph-container').addClass('mini');
+    $('.main-graph-container canvas').removeAttr('tabIndex');
     $('.mini-click-handler').on('click', this._enlargeGraph.bind(this));
 
     if (!$(document.activeElement).is($(document.body)))
@@ -321,7 +323,6 @@ export default class MainGraph extends React.Component {
           <TwoDGraph largeGraph={this.graph} selectedNode={this.state.selectedNode}/> : null}
         <div id="main-graph"></div>
         <div className="mini-click-handler"></div>
-        <div id="graph-container"></div>
       </div>
     )
   }

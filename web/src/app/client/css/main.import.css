@@ -27,7 +27,7 @@ body {
     right: 25px;
     width: 400px;
     height: 200px;
-    z-index: -1;
+    z-index: 1;
     margin-left: 25px;
 }
 
@@ -147,5 +147,6 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    background: transparent;
     position: absolute;
 }

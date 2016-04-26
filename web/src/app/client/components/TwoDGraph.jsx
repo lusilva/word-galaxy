@@ -33,29 +33,32 @@ export default class TwoDGraph extends React.Component {
     //console.log(traverseLinks);
 
 
-
     // initially add the word
     graph.addNode(selectedNode.word);
 
     // use selectedNode to start traversing the graph
     selectedNode.nodes.forEach(function(node) {
+      console.log(node.id);
       graph.addNode(node.id);
+      console.log(selectedNode.word + '---->' + node.id);
       graph.addLink(selectedNode.word, node.id);
 
-      //largeGraph.forEachLinkedNode(node.id, function(linkedNode, link) {
-      //  graph.addNode(linkedNode.id);
-      //  graph.addLink(selectedNode.word, linkedNode.id);
-      //});
+      largeGraph.forEachLinkedNode(node.id, function(linkedNode, link) {
+        graph.addNode(linkedNode.id);
+        console.log(linkedNode.id);
+        console.log(link.fromId + '---->' + link.toId);
+        graph.addLink(link.fromId, link.toId);
+      }, true);
     });
 
     var fabricGraphics = createFabric(graph, {
-      container: document.getElementById('graph-container')
+      container: document.getElementById('TwoDGraphContainer')
     });
 
     fabricGraphics.run();
   }
 
   render() {
-    return null;
+    return (<div id="TwoDGraphContainer"></div>);
   }
 }
