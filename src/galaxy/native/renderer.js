@@ -23,16 +23,40 @@ import getNearestIndex from './getNearestIndex.js';
 import createTouchControl from './touchControl.js';
 import createLineView from './lineView.js';
 import appConfig from './appConfig.js';
+import $ from 'jquery';
 
 export default sceneRenderer;
 
 var defaultNodeColor = 0xffffffff;
 var highlightNodeColor = 0xff0000ff;
 
+const NODE_COLORS = {
+  VERB: {
+    legend: '#e41a1c',
+    node: 0xe41a1cff
+  },
+  NOUN: {
+    legend: '#377eb8',
+    node: 0x377eb8ff
+  },
+  ADJECTIVE: {
+    legend: '#4daf4a',
+    node: 0x4daf4aff
+  },
+  ADJECTIVE_SATELLITE: {
+    legend: '#984ea3',
+    node: 0x984ea3ff
+  },
+  ADVERB: {
+    legend: '#ff7f00',
+    node: 0xff7f00ff
+  }
+};
+
 function sceneRenderer(container) {
   var renderer, positions, graphModel, touchControl, labels;
   var hitTest, lastHighlight, lastHighlightSize, cameraPosition;
-  var lineView, links, lineViewNeedsUpdate;
+  var lineView, links, lineViewNeedsUpdate, posCounter;
   var queryUpdateId = setInterval(updateQuery, 200);
 
   appEvents.positionsDownloaded.on(setPositions);
@@ -127,8 +151,16 @@ function sceneRenderer(container) {
     var view = renderer.getParticleView();
     var colors = view.colors();
 
-    for (var i = 0; i < labels.length; ++i) {
+    var i;
+    for (i = 0; i < labels.length; ++i) {
       colorNode(i * 3, colors, getColorForNode(labels[i]));
+    }
+
+    var legend = $(".legend");
+    legend.empty();
+    for (var color in NODE_COLORS) {
+      if (!NODE_COLORS.hasOwnProperty(color)) return;
+      legend.append("<li style='border-color:" + NODE_COLORS[color].legend + "'><em>" + color + "</em></li>");
     }
 
     hitTest = renderer.hitTest();
@@ -139,7 +171,21 @@ function sceneRenderer(container) {
   }
 
   function getColorForNode(label) {
-    return defaultNodeColor;
+    posCounter = posCounter || {};
+    switch (label.data.pos) {
+      case 'n':
+        return NODE_COLORS.NOUN.node;
+      case 'v':
+        return NODE_COLORS.VERB.node;
+      case 'a':
+        return NODE_COLORS.ADJECTIVE.node;
+      case 's':
+        return NODE_COLORS.ADJECTIVE_SATELLITE.node;
+      case 'r':
+        return NODE_COLORS.ADVERB.node;
+      default:
+        return defaultNodeColor;
+    }
   }
 
   function adjustMovementSpeed(tree) {
@@ -266,7 +312,7 @@ function sceneRenderer(container) {
     var sizes = view.sizes();
 
     if (lastHighlight !== undefined) {
-      colorNode(lastHighlight, colors, defaultNodeColor);
+      colorNode(lastHighlight, colors, getColorForNode(labels[lastHighlight / 3]));
       sizes[lastHighlight / 3] = lastHighlightSize;
     }
 

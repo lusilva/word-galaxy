@@ -8,6 +8,7 @@ import SearchBox from './search/searchBoxView.jsx';
 import NoWebGL from './noWebgl.jsx';
 import Help from './help.jsx';
 import About from './about.jsx';
+import Legend from './legend.jsx';
 
 import WindowCollection from './windows/windowCollectionView.jsx';
 import createNativeRenderer from './native/renderer.js';
@@ -36,6 +37,7 @@ function scene(x) {
         <WindowCollection />
         <Help />
         <About />
+        <Legend />
       </div>
     );
   };

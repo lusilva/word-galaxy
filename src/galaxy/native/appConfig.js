@@ -9,7 +9,7 @@ var defaultConfig = {
   lookAt: {x: 0, y: 0, z: 0, w: 1},
   showLinks: true,
   maxVisibleDistance: 1000,
-  scale: 5,
+  scale: 2.75,
   manifestVersion: 0
 };
 
