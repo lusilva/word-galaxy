@@ -2,77 +2,70 @@
 import networkx as nx
 # note need to run nltk.download() once & install wordnet in "All Packages"
 # 155,287 words organized in 117,659 synsets for a total of 206,941 word-sense pairs
-
 from nltk.corpus import wordnet as wn
-from collections import deque
-
 
 class WordGraph(object):
     """
-    graph object to create a dictionary
-    given a listing of words in a file
+    graph object of synset hyponym trees
     using Princeton's Wordnet
     """
     def __init__(self):
         """
         default constructor that initializes
-        from all of the synsets
+        graph from all of the synsets
         """
         # use networkX to create a directed graph
         # of words
         self.__graph = nx.DiGraph()
-        # map graph nodes to positions
-        self.__layout = {}
-        # map words to the synsets they belong to
-        self.__words_to_synsets = {}
-        # reverse of above
-        self.__synsets_to_words = {}
-        # map words to tense, definition, and id
-        self.__info_dict = {}
+        # # map graph nodes to positions
+        # self.__layout = {}
+        # # map words to the synsets they belong to
+        # self.__words_to_synsets = {}
+        # # reverse of above
+        # self.__synsets_to_words = {}
+        # # map words to tense, definition, and id
+        # self.__info_dict = {}
         # create w/ all synsets
         self.__create_graph_all_words()
-
-
-    # weighting:
-    # 'path_similarity'
-    # 'lin_similarity'
-    # 'res_similarity',
-    # 'jcn_similarity'
-    # 'lch_similarity'
-    #  'wup_similarity'
 
     def __create_graph_all_words(self):
         """
         creates the connections using
-        wn.all_synsets and Synset.tree
+        wn.all_synsets and Synset.hyponyms
         """
-        # use hyponyms to traverse down the tree
-        hyponyms = lambda s:s.hyponyms()
         # for each of the parts of speach
         # connections are supported only for nouns & verbs
         for synset in wn.all_synsets():
-            # is the synsets hyponym tree in the graph
-            tree = synset.tree(hyponyms, depth=1)
-            # parent/original synset is always the first element in the list
-            parent = tree[0]
-            # all children are listed after the parent
-            children = tree[1:]
+            parent = synset
+            children = parent.hyponyms()
             # self.__recurse_down_tree(parent, children)
             self.__add_to_graph(parent, children)
 
     def __add_to_graph(self, parent, children):
         """
         add the parent node to the graph
-        and an edge to all the parents children
+        and an edge to all the parents children(hyponyms)
         """
-        self.__graph.add_node(str(parent.name()), definition=str(parent.definition()))
+        self.__graph.add_node(WordGraph.__label(parent),
+            definition=str(parent.definition()))
         for child in children:
-            # w/ synset.tree(..., depth=1), child will always be
-            # a list of 1 element, the child
-            child = child[0]
             self.__graph.add_edge(str(parent.name()), str(child.name()))
 
-    # this function does not work well, use __add_to_graph
+    @staticmethod
+    def __label(synset):
+        """
+        create a label from the
+        funny synset name
+        """
+        split = str(synset.name()).split('.')
+        pos = split[-2]
+        name = '.'.join(split[0:-2])
+        return "{} ({})".format(name, pos)
+
+
+
+    # this function does not work well w/ recursion, use __add_to_graph
+    # use if using Synset.tree rather than Synset.hyponyms
     # def __recurse_down_tree(self, parent, children):
     #
     #     self.__graph.add_node(str(parent.name()))
@@ -90,7 +83,6 @@ class WordGraph(object):
     #         self.__graph.add_edge(str(grandparent.name()), str(parent.name()))
     #         children = child[1:]
     #         self.__recurse_down_tree(parent, children)
-
 
     def get_graph(self):
         """

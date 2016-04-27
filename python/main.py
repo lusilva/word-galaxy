@@ -7,14 +7,6 @@ import json
 
 
 if __name__ == '__main__':
-    # custom logging to console
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-    # simple argument parsing
-    # word_file_name = sys.argv[1]
-    # read all of the words
-    word_set = set()
-    # f = open(word_file_name)
-    # create word_dictionary from word_file
     word_graph = WordGraph()
     graph = word_graph.get_graph()
     # write each line of the dictionary to the json file
