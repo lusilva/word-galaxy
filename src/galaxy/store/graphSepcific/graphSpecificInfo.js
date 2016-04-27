@@ -7,10 +7,10 @@ function graphSpecificInfo(graphName) {
 function DefaultGraph(graphName) {
   this.graphName = graphName;
   this.getInDegreeLabel = function getInDegreeLabel(inDegreeValue) {
-    return 'in-degree';
+    return inDegreeValue == 1 ? 'hyponym' : 'hyponyms';
   };
 
   this.getOutDegreeLabel = function getInDegreeLabel(outDegreeValue) {
-    return 'out-degree';
+    return outDegreeValue == 1 ? 'hypernym' : 'hypernyms';
   };
 }

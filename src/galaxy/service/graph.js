@@ -2,6 +2,7 @@
  * Wrapper on top of graph data. Not sure where it will go yet.
  */
 import linkFinder from './edgeFinder.js';
+import renderer from '../native/renderer';
 export default graph;
 
 function graph(rawGraphLoaderData) {

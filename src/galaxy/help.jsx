@@ -35,7 +35,7 @@ function help(x) {
 
     return (
         <div className='navigation-help'>
-          <h3>Spaceship operating manual</h3>
+          <h3>Navigation Controls</h3>
             <table><tbody>
       <tr>
         <td colSpan="2"><code className='important-key'>mouse wheel</code></td>

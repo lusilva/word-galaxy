@@ -27,11 +27,10 @@ import appConfig from './appConfig.js';
 export default sceneRenderer;
 
 var defaultNodeColor = 0xffffffff;
-
 var highlightNodeColor = 0xff0000ff;
 
 function sceneRenderer(container) {
-  var renderer, positions, graphModel, touchControl;
+  var renderer, positions, graphModel, touchControl, labels;
   var hitTest, lastHighlight, lastHighlightSize, cameraPosition;
   var lineView, links, lineViewNeedsUpdate;
   var queryUpdateId = setInterval(updateQuery, 200);
@@ -108,10 +107,11 @@ function sceneRenderer(container) {
     renderer.around(r, x, y, z);
   }
 
-  function setPositions(_positions) {
+  function setPositions(_data) {
     destroyHitTest();
 
-    positions = _positions;
+    positions = _data.positions;
+    labels = _data.labels;
     focusScene();
 
     if (!renderer) {
@@ -124,11 +124,22 @@ function sceneRenderer(container) {
 
     renderer.particles(positions);
 
+    var view = renderer.getParticleView();
+    var colors = view.colors();
+
+    for (var i = 0; i < labels.length; ++i) {
+      colorNode(i * 3, colors, getColorForNode(labels[i]));
+    }
+
     hitTest = renderer.hitTest();
     hitTest.on('over', handleOver);
     hitTest.on('click', handleClick);
     hitTest.on('dblclick', handleDblClick);
     hitTest.on('hitTestReady', adjustMovementSpeed);
+  }
+
+  function getColorForNode(label) {
+    return defaultNodeColor;
   }
 
   function adjustMovementSpeed(tree) {
@@ -235,7 +246,7 @@ function sceneRenderer(container) {
   function handleDblClick(e) {
     var nearestIndex = getNearestIndex(positions, e.indexes, e.ray, 30);
     if (nearestIndex !== undefined) {
-      focusOnNode(nearestIndex/3);
+      focusOnNode(nearestIndex / 3);
     }
   }
 
@@ -256,15 +267,15 @@ function sceneRenderer(container) {
 
     if (lastHighlight !== undefined) {
       colorNode(lastHighlight, colors, defaultNodeColor);
-      sizes[lastHighlight/3] = lastHighlightSize;
+      sizes[lastHighlight / 3] = lastHighlightSize;
     }
 
     lastHighlight = nodeIndex;
 
     if (lastHighlight !== undefined) {
       colorNode(lastHighlight, colors, highlightNodeColor);
-      lastHighlightSize = sizes[lastHighlight/3];
-      sizes[lastHighlight/3] *= 1.5;
+      lastHighlightSize = sizes[lastHighlight / 3];
+      sizes[lastHighlight / 3] *= 1.5;
     }
 
     view.colors(colors);
@@ -287,7 +298,7 @@ function sceneRenderer(container) {
   }
 
   function colorNode(nodeId, colors, color) {
-    var colorOffset = (nodeId/3) * 4;
+    var colorOffset = (nodeId / 3) * 4;
     colors[colorOffset + 0] = (color >> 24) & 0xff;
     colors[colorOffset + 1] = (color >> 16) & 0xff;
     colors[colorOffset + 2] = (color >> 8) & 0xff;
@@ -309,7 +320,7 @@ function sceneRenderer(container) {
     var view = renderer.getParticleView();
     var colors = view.colors();
 
-    for (var i = 0; i < colors.length/4; i++) {
+    for (var i = 0; i < colors.length / 4; i++) {
       colorNode(i * 3, colors, 0xffffffff);
     }
 
@@ -324,7 +335,7 @@ function sceneRenderer(container) {
     if (nearestIndex !== undefined) {
       // since each node represented as triplet we need to divide by 3 to
       // get actual index:
-      return nearestIndex/3
+      return nearestIndex / 3
     }
   }
 
