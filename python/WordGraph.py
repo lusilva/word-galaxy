@@ -3,6 +3,9 @@ import networkx as nx
 # note need to run nltk.download() once & install wordnet in "All Packages"
 # 155,287 words organized in 117,659 synsets for a total of 206,941 word-sense pairs
 from nltk.corpus import wordnet as wn
+import collections
+
+SynsetInfo = collections.namedtuple('SynsetInfo', ['label', 'pos', 'sense_n', 'definition'])
 
 class WordGraph(object):
     """
@@ -46,23 +49,32 @@ class WordGraph(object):
         add the parent node to the graph
         and an edge to all the parents children(hyponyms)
         """
-        self.__graph.add_node(WordGraph.__label(parent),
-            definition=str(parent.definition()))
+        synset_info = WordGraph.__synset_information(parent)
+
+        self.__graph.add_node(synset_info.label,
+            pos=synset_info.pos,
+            sense_n=synset_info.sense_n,
+            definition=synset_info.definition)
+
         for child in children:
-            self.__graph.add_edge(str(parent.name()), str(child.name()))
+            parent_info = WordGraph.__synset_information(parent)
+            child_info = WordGraph.__synset_information(child)
+            self.__graph.add_edge(parent_info.label, child_info.label)
 
     @staticmethod
-    def __label(synset):
+    def __synset_information(synset):
         """
-        create a label from the
-        funny synset name
+        return a named tuple with the information
         """
         split = str(synset.name()).split('.')
-        pos = split[-2]
+        pos, sense_n = split[-2:]
         name = '.'.join(split[0:-2])
-        return "{} ({})".format(name, pos)
-
-
+        definition = synset.definition()
+        label="{} ({}:{})".format(name, pos, sense_n)
+        return SynsetInfo(label=label,
+            pos=pos,
+            sense_n=sense_n,
+            definition=definition)
 
     # this function does not work well w/ recursion, use __add_to_graph
     # use if using Synset.tree rather than Synset.hyponyms
