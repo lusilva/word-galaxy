@@ -38,16 +38,14 @@ function loadGraph(name, progress) {
   var outLinks = [];
   var inLinks = [];
 
-  // todo: handle errors
-  var manifestEndpoint = config.dataUrl + name;
-  var galaxyEndpoint = manifestEndpoint;
+  var galaxyEndpoint = config.dataUrl + name;
 
   var manifest;
 
   return loadManifest()
+    .then(loadLabels)
     .then(loadPositions)
     .then(loadLinks)
-    .then(loadLabels)
     .then(convertToGraph);
 
   function convertToGraph() {
@@ -60,7 +58,7 @@ function loadGraph(name, progress) {
   }
 
   function loadManifest() {
-    return request(manifestEndpoint + '/manifest.json?nocache=' + (+new Date()), {
+    return request(galaxyEndpoint + '/manifest.json?nocache=' + (+new Date()), {
       responseType: 'json'
     }).then(setManifest);
   }
@@ -73,7 +71,7 @@ function loadGraph(name, progress) {
       // trust overridden endpoint:
       galaxyEndpoint = manifest.endpoint;
     } else {
-      galaxyEndpoint = manifestEndpoint;
+      galaxyEndpoint = config.dataUrl + name;
     }
     galaxyEndpoint += '/' + version;
     appConfig.setManifestVersion(version);
@@ -105,7 +103,7 @@ function loadGraph(name, progress) {
     for (var i = 0; i < positions.length; ++i) {
       positions[i] *= scaleFactor;
     }
-    appEvents.positionsDownloaded.fire(positions);
+    appEvents.positionsDownloaded.fire({positions, labels});
   }
 
   function loadLinks() {

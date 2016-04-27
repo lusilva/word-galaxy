@@ -17,38 +17,7 @@ DegreeWindowViewModel.prototype.__name = 'DegreeWindowViewModel';
 
 // TODO: This is a dupe.
 function getDegreeName(connectionType, count) {
-  var graphName = scene.getGraphName();
-  switch (graphName) {
-    case 'npm':
-    case 'bower':
-    case 'cpan':
-    case 'cran':
-    case 'composer':
-    case 'rubygems':
-    case 'gosearch':
-    case 'debian':
-    case 'fedora':
-    case 'arch':
-    case 'brew':
-    case 'nuget':
-      return dependencyName(connectionType, count);
-    case 'github':
-      return followerName(connectionType, count);
-  }
-  return connectionType === 'in' ? 'indegree' : 'outdegree';
-}
-
-function dependencyName(connectionType, count) {
-  if (connectionType === 'in') {
-    return count === 1 ? 'dependent' : 'dependents';
-  }
-  return count === 1 ? 'dependency' : 'dependencies';
-}
-
-function followerName(connectionType, count) {
-  if (connectionType === 'out') {
-    return 'following'
-  }
-
-  return count === 1 ? 'follower' : 'followers';
+  return connectionType === 'in' ?
+    (count == 1 ? 'hyponym' : 'hyponyms') :
+    (count == 1 ? 'hypernym' : 'hypernyms');
 }

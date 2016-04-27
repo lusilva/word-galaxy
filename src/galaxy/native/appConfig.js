@@ -5,11 +5,11 @@ import qs from 'qs';
 
 
 var defaultConfig = {
-  pos: {x : 0, y: 0, z: 0 },
+  pos: {x: 0, y: 0, z: 0},
   lookAt: {x: 0, y: 0, z: 0, w: 1},
   showLinks: true,
   maxVisibleDistance: 1000,
-  scale: 3.75,
+  scale: 5,
   manifestVersion: 0
 };
 
@@ -68,8 +68,7 @@ function appConfig() {
 
   function queryChanged() {
     var currentHashConfig = parseFromHash(window.location.hash);
-    var cameraChanged = !same(currentHashConfig.pos, hashConfig.pos) ||
-                        !same(currentHashConfig.lookAt, hashConfig.lookAt);
+    var cameraChanged = !same(currentHashConfig.pos, hashConfig.pos) || !same(currentHashConfig.lookAt, hashConfig.lookAt);
     var showLinksChanged = hashConfig.showLinks !== currentHashConfig.showLinks;
 
     if (cameraChanged) {
@@ -101,8 +100,8 @@ function appConfig() {
 
   function setCameraConfig(pos, lookAt) {
     if (same(pos, hashConfig.pos) &&
-        same(lookAt, hashConfig.lookAt) &&
-        lookAt.w === hashConfig.lookAt.w) return;
+      same(lookAt, hashConfig.lookAt) &&
+      lookAt.w === hashConfig.lookAt.w) return;
 
     hashConfig.pos.x = pos.x;
     hashConfig.pos.y = pos.y;
@@ -119,7 +118,6 @@ function appConfig() {
   function updateHash() {
     // TODO: This needs to be rewritten. It should not update all fields,
     // only those that modified.
-    var name = scene.getGraphName();
     var pos = hashConfig.pos;
     var lookAt = hashConfig.lookAt;
     var hash =
@@ -158,8 +156,8 @@ function appConfig() {
   function same(v1, v2) {
     if (!v1 || !v2) return false;
     return v1.x === v2.x &&
-           v1.y === v2.y &&
-           v1.z === v2.z;
+      v1.y === v2.y &&
+      v1.z === v2.z;
   }
 
   function parseFromHash(hash) {
@@ -182,7 +180,10 @@ function appConfig() {
       w: getNumber(query.lw || 1)
     };
 
-    var showLinks = (query.l === '1');
+    var showLinks = defaultConfig.showLinks;
+    if (query.l) {
+      showLinks = (query.l === '1')
+    }
 
     return {
       pos: normalize(pos),
