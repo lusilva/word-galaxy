@@ -19,7 +19,7 @@ Meteor.methods({
     // if the graph hasn't been created
     // load the data set
     if (!graph) {
-      HTTP.get(Meteor.absoluteUrl('/generated-all-synsets.json'), function(err, result) {
+      HTTP.get(Meteor.absoluteUrl('/generated.json'), function(err, result) {
         // if we don't have an er
         if (!err && result.data) {
           let data = result.data;
@@ -27,7 +27,14 @@ Meteor.methods({
           let graph = load(data,
             // function that returns object w/ id and info_dict[word] from python,
             function(node) {
-              return {id: node["id"], data: node['data']};
+              return {
+                id: node["id"],
+                data: {
+                  definition: node['definition'],
+                  pos: node['pos'],
+                  sense_n: node['sense_n']
+                }
+              };
             },
             // function that links two nodes
             function(link) {
@@ -48,12 +55,12 @@ Meteor.methods({
     // we don't want to overwrite the previous iterations
     function graphCallback(graph, overwrite) {
       // create instance of ngraph.graph w/ chinese whispers graph clustering algorithm
-      var whisper = createWhisper(graph);
-      var requiredChangeRate = 0; // 0 is complete convergence
-      //
-      while (whisper.getChangeRate() > requiredChangeRate) {
-        whisper.step();
-      }
+      //var whisper = createWhisper(graph);
+      //var requiredChangeRate = 0; // 0 is complete convergence
+      ////
+      //while (whisper.getChangeRate() > requiredChangeRate) {
+      //  whisper.step();
+      //}
       //let coarseGraph = coarsen(graph, whisper);
       //let index = 0;
       //coarseGraph.forEachNode(function(node) {
@@ -64,66 +71,66 @@ Meteor.methods({
       //  });
       //});
 
-      var clusters = whisper.createClusterMap();
-      // removeLinks for removing links in the graph
-      var removedLinks = [];
+      //var clusters = whisper.createClusterMap();
+      //// removeLinks for removing links in the graph
+      //var removedLinks = [];
+      //
+      //// use forEach to remove links and cluster
+      //clusters.forEach(visitCluster);
+      //
+      //function visitCluster(clusterNodes, clusterClass) {
+      //  var i;
+      //  for (i = 0; i < clusterNodes.length; ++i) {
+      //    let node = graph.getNode(clusterNodes[i]);
+      //    graph.addNode(node.id, {cluster: clusterClass, info: node.data});
+      //  }
+      //
+      //  for (i = 0; i < clusterNodes.length; ++i) {
+      //    let node = graph.getNode(clusterNodes[i]);
+      //    graph.forEachLinkedNode(node.id,
+      //      function(linkedNode, link) {
+      //        // if the clusters are not the same
+      //        // we remove the link from the graph
+      //        if (linkedNode.data.cluster != node.data.cluster) {
+      //          graph.removeLink(link);
+      //          removedLinks.push(link);
+      //        }
+      //      },
+      //      true
+      //    );
+      //  }
+      //}
+      //
+      //let removedThisIteration;
+      //while (!removedThisIteration || removedThisIteration.length > 0) {
+      //  removedThisIteration = [];
+      //  graph.forEachLink(function(link) {
+      //    if (!link) return;
+      //    let from = graph.getNode(link.fromId);
+      //    let to = graph.getNode(link.toId);
+      //    if (from.data.cluster !== to.data.cluster) {
+      //      graph.removeLink(link);
+      //      removedThisIteration.push(link);
+      //    }
+      //  });
+      //  for (var i = 0; i < removedThisIteration.length; ++i) {
+      //    removedLinks.push(removedThisIteration[i]);
+      //  }
+      //}
+      //// print each connection in the graph w/o being in the same cluster
+      //graph.forEachLink(function(link) {
+      //  let from = graph.getNode(link.fromId);
+      //  let to = graph.getNode(link.toId);
+      //  if (from.data.cluster !== to.data.cluster) {
+      //    console.log({from: from.data.cluster, to: to.data.cluster});
+      //  }
+      //});
+      //
+      //console.log(removedLinks.length);
 
-      // use forEach to remove links and cluster
-      clusters.forEach(visitCluster);
-
-      function visitCluster(clusterNodes, clusterClass) {
-        var i;
-        for (i = 0; i < clusterNodes.length; ++i) {
-          let node = graph.getNode(clusterNodes[i]);
-          graph.addNode(node.id, {cluster: clusterClass, info: node.data});
-        }
-
-        for (i = 0; i < clusterNodes.length; ++i) {
-          let node = graph.getNode(clusterNodes[i]);
-          graph.forEachLinkedNode(node.id,
-            function(linkedNode, link) {
-              // if the clusters are not the same
-              // we remove the link from the graph
-              if (linkedNode.data.cluster != node.data.cluster) {
-                graph.removeLink(link);
-                removedLinks.push(link);
-              }
-            },
-            true
-          );
-        }
-      }
-
-      let removedThisIteration;
-      while (!removedThisIteration || removedThisIteration.length > 0) {
-        removedThisIteration = [];
-        graph.forEachLink(function(link) {
-          if (!link) return;
-          let from = graph.getNode(link.fromId);
-          let to = graph.getNode(link.toId);
-          if (from.data.cluster !== to.data.cluster) {
-            graph.removeLink(link);
-            removedThisIteration.push(link);
-          }
-        });
-        for (var i = 0; i < removedThisIteration.length; ++i) {
-          removedLinks.push(removedThisIteration[i]);
-        }
-      }
-      // print each connection in the graph w/o being in the same cluster
-      graph.forEachLink(function(link) {
-        let from = graph.getNode(link.fromId);
-        let to = graph.getNode(link.toId);
-        if (from.data.cluster !== to.data.cluster) {
-          console.log({from: from.data.cluster, to: to.data.cluster});
-        }
-      });
-
-      console.log(removedLinks.length);
-
-      // var path = kruskal(coarseGraph);
+      //var path = kruskal(graph);
       //let tree = createGraph();
-      //coarseGraph.forEachNode(function(node) {
+      //graph.forEachNode(function(node) {
       //  tree.addNode(node.id, node.data);
       //});
       //for (var i = 0; i < path.length; ++i) {
@@ -132,17 +139,10 @@ Meteor.methods({
       //}
 
       let layout = createLayout(graph, {
-        iterations: 100,
-        saveEach: 25,
-        physicsSettings: {
-          springLength: 100,
-          springCoeff: 0.0008,
-          gravity: -500,
-          theta: 0.8,
-          dragCoeff: 0.0000000001
-        }
+        iterations: 150,
+        saveEach: 25
       });
-      layout.run(overwrite);
+      layout.run(true);
     }
   },
   findSynsets: function(word) {

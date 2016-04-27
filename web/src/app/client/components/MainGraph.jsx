@@ -100,7 +100,7 @@ export default class MainGraph extends React.Component {
     let positions = new Int32Array(buffer);
     this.graph = createGraph();
     let node = 0;
-    let scaleFactor = 2;
+    let scaleFactor = 10;
 
     for (var i = 0; i < positions.length; i += 3) {
       let x = positions[i] * scaleFactor;
@@ -109,7 +109,6 @@ export default class MainGraph extends React.Component {
 
       let label = this.labels[node];
       if (label.data.hidden) {
-        console.log('adding hidden node!');
         this.graph.addNode(label.id, merge_options({x, y, z, hidden: true}, label.data));
       } else {
         //console.log(merge_options({x, y, z, hidden: false}, label.data));
@@ -228,14 +227,11 @@ export default class MainGraph extends React.Component {
       initPosition: this._getNodePosition.bind(this),
       autoFit: false,
       link: function createLinkUI(link) {
-        if (link.data && link.data.hidden)
-          return;
-
-        return;
+        //return;
 
         return {
-          fromColor: 0x808080,
-          toColor: 0x808080
+          fromColor: 0x000000,
+          toColor: 0x000000
         }
       },
       node: function createNodeUI(node) {
@@ -244,7 +240,7 @@ export default class MainGraph extends React.Component {
 
         return {
           color: 0xFF99C2,
-          size: 20
+          size: 100
         }
       }
     });
