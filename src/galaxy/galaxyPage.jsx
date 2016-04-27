@@ -9,8 +9,6 @@ function galaxyPage(x) {
   var currentPath;
 
   x.render = function() {
-    // This doesn't seem to belong here. The whole routing system is a mess
-    // TODO: Come up with better routing
     loadGraphIfRouteChanged();
 
     return (
@@ -22,11 +20,7 @@ function galaxyPage(x) {
   };
 
   function loadGraphIfRouteChanged() {
-    var routeChanged = x.props.params.name !== currentPath;
-    if (routeChanged) {
-      currentPath = x.props.params.name;
-      appEvents.downloadGraphRequested.fire(currentPath);
-    }
+    appEvents.downloadGraphRequested.fire('synsets');
     appEvents.queryChanged.fire();
   }
 }

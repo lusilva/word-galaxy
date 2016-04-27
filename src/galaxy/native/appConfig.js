@@ -9,7 +9,7 @@ var defaultConfig = {
   lookAt: {x: 0, y: 0, z: 0, w: 1},
   showLinks: true,
   maxVisibleDistance: 150,
-  scale: 1.75,
+  scale: 3.75,
   manifestVersion: 0
 };
 
@@ -122,7 +122,7 @@ function appConfig() {
     var name = scene.getGraphName();
     var pos = hashConfig.pos;
     var lookAt = hashConfig.lookAt;
-    var hash = '#/galaxy/' + name +
+    var hash =
       '?cx=' + Math.round(pos.x) +
       '&cy=' + Math.round(pos.y) +
       '&cz=' + Math.round(pos.z) +

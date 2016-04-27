@@ -44,7 +44,7 @@ function graph(rawGraphLoaderData) {
     var regex = compileRegex(str);
     if (!regex) return no;
 
-    return function (i, labels, outLinks, inLinks, pos) {
+    return function(i, labels, outLinks, inLinks, pos) {
       var label = labels[i];
       if (typeof label === 'string') {
         return label.match(regex);
@@ -53,7 +53,9 @@ function graph(rawGraphLoaderData) {
     }
   }
 
-  function no() { return false; }
+  function no() {
+    return false;
+  }
 
   function compileRegex(pattern) {
     try {
@@ -87,9 +89,9 @@ function graph(rawGraphLoaderData) {
 
     return {
       id: id,
-      name: labels[id],
+      name: labels[id].id,
       out: outLinksCount,
-      in : inLinksCount
+      in: inLinksCount
     };
   }
 
@@ -98,7 +100,7 @@ function graph(rawGraphLoaderData) {
     if (id < 0 || id > labels.length) {
       throw new Error(id + " is outside of labels range");
     }
-    return labels[id];
+    return labels[id].id;
   }
 
   function getPositions() {

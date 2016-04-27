@@ -1,6 +1,6 @@
 import scene from './store/scene.js';
 import React from 'react';
-import hoverModel from './store/hover.js';
+import hoverModel from './store/hover';
 
 module.exports = require('maco')(hoverInfo, React);
 
