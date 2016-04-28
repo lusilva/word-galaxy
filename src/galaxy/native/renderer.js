@@ -285,14 +285,16 @@ function sceneRenderer(container) {
 
   function handleClick(e) {
     var nearestIndex = getNearestIndex(positions, e.indexes, e.ray, 30);
-
+    if (nearestIndex !== undefined) {
+      focusOnNode(nearestIndex / 3);
+    }
     appEvents.selectNode.fire(getModelIndex(nearestIndex));
   }
 
   function handleDblClick(e) {
     var nearestIndex = getNearestIndex(positions, e.indexes, e.ray, 30);
     if (nearestIndex !== undefined) {
-      focusOnNode(nearestIndex / 3);
+      appEvents.show2DGraph.fire(getModelIndex(nearestIndex), focusOnNode.bind(this));
     }
   }
 
@@ -319,6 +321,7 @@ function sceneRenderer(container) {
     lastHighlight = nodeIndex;
 
     if (lastHighlight !== undefined) {
+      appEvents.hideHelp.fire();
       colorNode(lastHighlight, colors, highlightNodeColor);
       lastHighlightSize = sizes[lastHighlight / 3];
       sizes[lastHighlight / 3] *= 1.5;

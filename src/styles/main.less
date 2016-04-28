@@ -18,12 +18,23 @@ body {
 }
 
 .graph-full-size {
-  top: 0;
-  left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   position: absolute;
   overflow: hidden;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.graph-full-size.mini {
+  bottom: 10px;
+  right: 10px;
+  width: 350px;
+  height: 250px;
 }
 
 h1, h2 {

@@ -73,6 +73,10 @@ export default eventMirror([
    */
   'toggleHelp',
 
+  'hideHelp',
+
+  'show2DGraph',
+
   // These events are not documented since I'm not sure whether to keep them
    'showNodeListWindow',
    'hideNodeListWindow',
