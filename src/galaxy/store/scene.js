@@ -15,7 +15,7 @@ function sceneStore() {
   var unknownNodeInfo = {
     inDegree: '?',
     outDegree: '?'
-  }
+  };
 
   var graph;
 

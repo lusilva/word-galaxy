@@ -32,8 +32,12 @@ function graph(rawGraphLoaderData) {
       query = regexMatcher(query);
     }
 
+    let names = labels.map(function(label) {
+      return label.id.replace(/_/g, " ");
+    });
+
     for (var i = 0; i < labels.length; ++i) {
-      if (query(i, labels, outLinks, inLinks, positions)) {
+      if (query(i, names, outLinks, inLinks, positions)) {
         result.push(getNodeInfo(i));
       }
     }
