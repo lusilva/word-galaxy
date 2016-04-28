@@ -90,7 +90,9 @@ function graph(rawGraphLoaderData) {
 
     return {
       id: id,
-      name: labels[id].id,
+      definition: labels[id].data.definition,
+      pos: labels[id].data.pos,
+      name: labels[id].id.replace(/_/g, " "),
       out: outLinksCount,
       in: inLinksCount
     };
