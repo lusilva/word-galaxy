@@ -12,4 +12,4 @@ if __name__ == '__main__':
     # write each line of the dictionary to the json file
     with open('output/generated.json', 'w') as outfile:
         outfile.write(json.dumps(json_graph.node_link_data(graph)))
-    nx.write_gexf(graph, 'output/generated.gexf')
+    # nx.write_gexf(graph, 'output/generated.gexf')

@@ -5,7 +5,7 @@ import networkx as nx
 from nltk.corpus import wordnet as wn
 import collections
 
-SynsetInfo = collections.namedtuple('SynsetInfo', ['label', 'pos', 'sense_n', 'definition'])
+SynsetInfo = collections.namedtuple('SynsetInfo', ['label', 'pos', 'sense_n', 'definition', 'lemmas'])
 
 class WordGraph(object):
     """
@@ -54,7 +54,8 @@ class WordGraph(object):
         self.__graph.add_node(synset_info.label,
             pos=synset_info.pos,
             sense_n=synset_info.sense_n,
-            definition=synset_info.definition)
+            definition=synset_info.definition,
+            lemmas=synset_info.lemmas)
 
         for child in children:
             parent_info = WordGraph.__synset_information(parent)
@@ -70,11 +71,13 @@ class WordGraph(object):
         pos, sense_n = split[-2:]
         name = '.'.join(split[0:-2])
         definition = synset.definition()
-        label="{} ({}:{})".format(name, pos, sense_n)
+        label = "{} ({}:{})".format(name, pos, sense_n)
+        lemmas = [str(lemma) for lemma in synset.lemma_names()]
         return SynsetInfo(label=label,
             pos=pos,
             sense_n=sense_n,
-            definition=definition)
+            definition=definition,
+            lemmas=lemmas)
 
     # this function does not work well w/ recursion, use __add_to_graph
     # use if using Synset.tree rather than Synset.hyponyms
