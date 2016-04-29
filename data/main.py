@@ -6,25 +6,26 @@ import networkx as nx
 
 
 def main():
+    # log debug messages to standard error
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     # Set to either google-10000 or small-data
-    data_file = 'small-data'
+    # output file for
+    data_file = 'all-synsets'
 
     # create a set of words from the input file
-    word_set = set()
-    with open(data_file + '.txt') as f:
-        for word in f:
-            word_set.add(word.rstrip())
+    # word_set = set()
+    # with open(data_file + '.txt') as f:
+    #     for word in f:
+    #         word_set.add(word.rstrip())
 
     # create a new dictionary with the words
-    dictionary = Dictionary(word_set)
+    dictionary = Dictionary()
     graph = dictionary.get_graph()
     # dictionary.calculate_spring_layout(100)
     # plt.savefig("path.png")
-    # with open('../sigma/' + data_file + '.json', 'w') as outfile:
-    #     outfile.write(json.dumps(json_graph.node_link_data(graph)))
-    nx.write_gexf(graph, data_file + '.gexf')
+    with open('generated-' + data_file + '.json', 'w') as outfile:
+        outfile.write(json.dumps(json_graph.node_link_data(graph)))
 
 
 if __name__ == '__main__':

@@ -1,4 +1,3 @@
-
 # Logs
 logs
 *.log
@@ -40,6 +39,4 @@ __pycache__/
 *.json
 *.gexf
 
-
 .idea
-
