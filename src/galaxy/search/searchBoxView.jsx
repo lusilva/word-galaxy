@@ -7,6 +7,7 @@ module.exports = require('maco')(searchBar, React);
 
 function searchBar(x) {
   var shouldShow = false;
+  var searchInProgress = false;
 
   x.render = function() {
     if (!shouldShow) return null;
@@ -41,11 +42,14 @@ function searchBar(x) {
   }
 
   function runSearch(e) {
+    searchInProgress = true;
     var searchText = ReactDOM.findDOMNode(x.refs.searchText).value;
     searchBoxModel.search(searchText);
+    searchInProgress = false;
   }
 
   function runSubmit(e) {
+    if (searchInProgress) return;
     e.preventDefault();
     runSearch(e);
   }

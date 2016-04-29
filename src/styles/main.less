@@ -28,6 +28,10 @@ body {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+
+  .mini-click-directions {
+    display: none;
+  }
 }
 
 .graph-full-size.mini {
@@ -35,6 +39,15 @@ body {
   right: 20px;
   width: 300px;
   height: 200px;
+
+  .mini-click-directions {
+    z-index: 10;
+    display: inline-block;
+    background: black;
+    color: white;
+    bottom: 0;
+  }
+
 }
 
 @media (max-width: @screen-sm-min) {
@@ -127,6 +140,11 @@ h4 {
   padding: 10px;
   right: 10px;
   top: 0px;
+  cursor: pointer;
+}
+
+.about:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: @screen-sm-min) {
@@ -286,4 +304,8 @@ a.media {
 
 .legend span {
   float: right;
+}
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 1000;
 }

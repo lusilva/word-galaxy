@@ -30,7 +30,9 @@ function scene(x) {
 
     return (
       <div>
-        <div ref='graphContainer' className='graph-full-size'></div>
+        <div ref='graphContainer' className='graph-full-size'>
+          <div className="mini-click-directions">click here to return to 3D view</div>
+        </div>
         <div ref='secondaryGraphContainer' className='graph-2D'></div>
         <HoverInfo />
         <NodeDetails />
