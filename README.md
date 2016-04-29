@@ -4,8 +4,8 @@
 Please checkout out his project and the awesome work he did -
 His repo can be found [here](https://github.com/anvaka/pm).
 
-Please read [operating manual](https://github.com/anvaka/pm/tree/master/about#software-galaxies-documentation) -
-it is short and describes basic navigation principles.
+This was build as a final project for the Interactive Visualization
+class at RPI.
 
 # local development
 

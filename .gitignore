@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -38,3 +39,7 @@ __pycache__/
 # Gefy & Json Files
 *.json
 *.gexf
+
+
+.idea
+
