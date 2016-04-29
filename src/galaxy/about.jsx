@@ -33,7 +33,8 @@ function about(x) {
           <h4>What do nodes mean?</h4>
           <p>
             Nodes represent things called synsets. A synset is essentially a single concept that is represented by a
-            number of terms or synonyms. Each synset has a definition associated with it. There are roughly 117,000 synsets
+            number of terms or synonyms. Each synset has a definition associated with it. There are roughly 117,000
+            synsets
             shown in this visualization, which are all the synsets stored in WordNet.
           </p>
           <h4>What does hypernym/holonym mean?</h4>
@@ -52,7 +53,8 @@ function about(x) {
           <h3>Contact</h3>
           <p>
             <h4>Issues</h4>
-            Found an issue or bug? Please report it on our github: GITHUB_LINK_HERE
+            Found an issue or bug? Please report it on our <a target="__blank"
+                                                              href="https://github.com/lusilva/word-galaxy">github</a>
           </p>
         </Modal>
       </div>
