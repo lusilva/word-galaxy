@@ -10,7 +10,7 @@ class at RPI.
 # local development
 
 ```
-git clone https://github.com/anvaka/pm
+git clone https://github.com/lusilva/word-galaxy
 cd pm
 npm i
 npm start
