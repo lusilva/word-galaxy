@@ -18,6 +18,6 @@ DegreeWindowViewModel.prototype.__name = 'DegreeWindowViewModel';
 // TODO: This is a dupe.
 function getDegreeName(connectionType, count) {
   return connectionType === 'in' ?
-    (count == 1 ? 'hyponym' : 'hyponyms') :
-    (count == 1 ? 'hypernym' : 'hypernyms');
+    (count == 1 ? 'hypernym' : 'hypernyms') :
+    (count == 1 ? 'hyponym' : 'hyponyms');
 }

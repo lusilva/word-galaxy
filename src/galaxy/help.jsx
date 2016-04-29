@@ -40,7 +40,7 @@ function help(x) {
             <table><tbody>
       <tr>
         <td colSpan="2"><code className='important-key'>mouse wheel</code></td>
-        <td colSpan="2">show this help</td>
+        <td colSpan="2">show this help menu</td>
       </tr>
       <tr>
         <td colSpan="2"><code className='important-key'>click word</code></td>
@@ -52,7 +52,7 @@ function help(x) {
       </tr>
       <tr className='spacer-row'>
         <td colSpan='2'><code className='important-key' >any key</code></td>
-        <td colSpan='2'>hide this help</td>
+        <td colSpan='2'>hide this help menu</td>
       </tr>
       <tr>
       <td><code>W</code></td>
