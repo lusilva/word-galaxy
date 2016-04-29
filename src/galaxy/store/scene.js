@@ -74,13 +74,13 @@ function sceneStore() {
   }
 
   function reportProgress(progress) {
-    api.fire('loadProgress', progress);
+    appEvents.loadProgress.fire(progress);
   }
 
   function loadComplete(model) {
     loadInProgress = false;
     graph = model;
-    api.fire('loadProgress', {});
+    appEvents.loadProgress.fire({});
     appEvents.graphDownloaded.fire();
   }
 }

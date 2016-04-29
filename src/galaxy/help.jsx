@@ -9,6 +9,7 @@
 import React from 'react';
 import appEvents from './service/appEvents.js';
 import Key from './utils/key.js';
+import $ from 'jquery';
 
 export default require('maco')(help, React);
 
@@ -40,6 +41,14 @@ function help(x) {
       <tr>
         <td colSpan="2"><code className='important-key'>mouse wheel</code></td>
         <td colSpan="2">show this help</td>
+      </tr>
+      <tr>
+        <td colSpan="2"><code className='important-key'>click word</code></td>
+        <td colSpan="2">focus on it</td>
+      </tr>
+      <tr>
+        <td colSpan="2"><code className='important-key'>double click word</code></td>
+        <td colSpan="2">switch to 2-d view</td>
       </tr>
       <tr className='spacer-row'>
         <td colSpan='2'><code className='important-key' >any key</code></td>
@@ -133,10 +142,8 @@ function help(x) {
   }
 
   function hideHelp() {
-    if (!helpWasShown) {
-      helpWasShown = true;
-      x.forceUpdate();
-    }
+    helpWasShown = true;
+    x.forceUpdate();
   }
 
   function resetHelp() {
@@ -160,6 +167,7 @@ function help(x) {
   function handlewheel(e) {
     // only show when used on scene
     if (e.target && e.target.nodeName === 'CANVAS') {
+      if ($(e.target).parent().hasClass('mini')) return;
       helpWasShown = false;
       x.forceUpdate();
       appEvents.focusScene.fire();

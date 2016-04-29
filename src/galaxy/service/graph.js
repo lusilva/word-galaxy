@@ -3,10 +3,28 @@
  */
 import linkFinder from './edgeFinder.js';
 import renderer from '../native/renderer';
+import Map from 'collections/map';
 export default graph;
 
 function graph(rawGraphLoaderData) {
   var {labels, outLinks, inLinks, positions} = rawGraphLoaderData;
+
+  var lemmasMap = new Map();
+  labels = labels.map(function(label, index) {
+    label.id = label.id.replace(/_/g, " ");
+    label.data.lemmas = label.data.lemmas.map(function(lemma) {
+      lemma = lemma.replace(/_/g, " ");
+      if (lemmasMap.has(lemma)) {
+        lemmasMap.set(lemma, lemmasMap.get(lemma).concat([index]));
+      } else {
+        lemmasMap.set(lemma, [index]);
+      }
+      return lemma;
+    });
+    return label;
+  });
+  var lemmas = lemmasMap.keys();
+
   var empty = [];
 
   var api = {
@@ -32,34 +50,33 @@ function graph(rawGraphLoaderData) {
       query = regexMatcher(query);
     }
 
-    let names = labels.map(function(label) {
-      return label.id.replace(/_/g, " ");
-    });
-
-    for (var i = 0; i < labels.length; ++i) {
-      if (query(i, names, outLinks, inLinks, positions)) {
-        result.push(getNodeInfo(i));
+    for (var i = 0; i < lemmas.length; ++i) {
+      if (query(i, lemmas)) {
+        var indices = lemmasMap.values()[i];
+        var nodes = [];
+        for (var index = 0; index < indices.length; index++) {
+          nodes.push(getNodeInfo(indices[index]));
+        }
+        result.push({lemma: lemmas[i], nodes});
       }
     }
-
     return result;
   }
 
   function regexMatcher(str) {
     var regex = compileRegex(str);
-    if (!regex) return no;
+    if (!regex) return false;
 
-    return function(i, labels, outLinks, inLinks, pos) {
+    return function(i, labels) {
       var label = labels[i];
-      if (typeof label === 'string') {
-        return label.match(regex);
+      if (str.length <= 3) {
+        return str === label;
       }
-      return label.toString().match(regex);
+      if (label.length >= str.length) {
+        return (label.startsWith(str) || label.endsWith(str));
+      }
+      return false;
     }
-  }
-
-  function no() {
-    return false;
   }
 
   function compileRegex(pattern) {
@@ -95,8 +112,9 @@ function graph(rawGraphLoaderData) {
     return {
       id: id,
       definition: labels[id].data.definition,
+      lemmas: labels[id].data.lemmas,
       pos: labels[id].data.pos,
-      name: labels[id].id.replace(/_/g, " "),
+      name: labels[id].id,
       out: outLinksCount,
       in: inLinksCount
     };

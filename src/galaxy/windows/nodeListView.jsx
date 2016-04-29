@@ -14,7 +14,7 @@ var windowId = 0;
 function nodeListView(x) {
   windowId += 1;
 
-  x.render = function () {
+  x.render = function() {
     var windowViewModel = x.props.viewModel;
     var className = 'window-container';
 
@@ -27,7 +27,7 @@ function nodeListView(x) {
 
     return (
       <div className={className}>
-        <WindowTitle viewModel={windowViewModel} />
+        <WindowTitle viewModel={windowViewModel}/>
         <div className='window-list-content'>
           {content(items)}
         </div>
@@ -36,21 +36,23 @@ function nodeListView(x) {
 
     function renderItem(idx, key) {
       var vm = items[idx];
-      return <NodeInfoRow key={key} viewModel={vm} />;
+      return <NodeInfoRow key={key} viewModel={vm}/>;
     }
 
-    function getHeight() {
-      // FIXME: Hardcoding is not good.
+    function getHeight(index) {
+      let content = items[index];
+      if (content.nodes)
+        return (content.nodes.length + 1) * 20;
       return 20;
     }
 
     function content(items) {
       if (items.length > 0) {
         return <ReactList itemRenderer={renderItem}
-                  length={items.length}
-                  itemSizeGetter={getHeight}
-                  type='variable'
-                  key={id}/>;
+                          length={items.length}
+                          itemSizeGetter={getHeight}
+                          type='variable'
+                          key={id}/>;
       } else {
         return null;
       }

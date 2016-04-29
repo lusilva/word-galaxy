@@ -17,16 +17,13 @@ function searchBoxModel() {
   return api;
 
   function search(newText) {
+    appEvents.hideNodeListWindow.fire(searchResultsWindowId);
     if (newText && newText[0] === ':') return; // processed in submit
+    if (!newText || newText.length == 0) return;
 
     var searchResults = scene.find(newText);
     var searchResultWindowViewModel = new SearchResultWindowViewModel(searchResults);
-
-    if (searchResults.length) {
-      appEvents.showNodeListWindow.fire(searchResultWindowViewModel, searchResultsWindowId);
-    } else {
-      appEvents.hideNodeListWindow.fire(searchResultsWindowId);
-    }
+    appEvents.showNodeListWindow.fire(searchResultWindowViewModel, searchResultsWindowId);
   }
 
   function submit(command) {

@@ -62,8 +62,6 @@ function scene(x) {
 
 
   function show2DGraph(nodeId, focusNodeCallback) {
-    
-
 
     let fullGraph = $('.graph-full-size');
     fullGraph.removeAttr("tabindex");
@@ -73,12 +71,12 @@ function scene(x) {
     var that = this;
     var intervalID = setInterval(function() {
       window.dispatchEvent(new Event('resize'));
-      focusNodeCallback(nodeId);
-      if (++x === 5) {
+      if (++x === 50) {
+        focusNodeCallback(nodeId);
         fullGraph.on('click.graph', hide2DGraph.bind(that, nodeId, focusNodeCallback));
         window.clearInterval(intervalID);
       }
-    }, 100);
+    }, 10);
   }
 
   function hide2DGraph(nodeId, focusNodeCallback) {
@@ -90,12 +88,11 @@ function scene(x) {
     var x = 0;
     var intervalID = setInterval(function() {
       window.dispatchEvent(new Event('resize'));
-      focusNodeCallback(nodeId);
-      if (++x === 5) {
+      if (++x === 50) {
         appEvents.focusScene.fire();
         window.clearInterval(intervalID);
       }
-    }, 100);
+    }, 10);
   }
 
   function handleDelegateClick(e) {

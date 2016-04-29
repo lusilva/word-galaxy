@@ -8,14 +8,14 @@ import windowCollectionModel from './windowCollectionModel.js';
 module.exports = require('maco')(windowCollectionView, React);
 
 function windowCollectionView(x) {
-  x.render = function () {
+  x.render = function() {
     var windows = windowCollectionModel.getWindows();
     if (windows.length === 0) return null;
 
     return <div>{windows.map(toWindowView)}</div>;
   };
 
-  x.componentDidMount = function () {
+  x.componentDidMount = function() {
     windowCollectionModel.on('changed', update);
   };
 
@@ -24,7 +24,7 @@ function windowCollectionView(x) {
   };
 
   function toWindowView(windowViewModel, idx) {
-    return <NodeListView viewModel={windowViewModel} key={idx} />;
+    return <NodeListView viewModel={windowViewModel} key={idx}/>;
   }
 
   function update() {

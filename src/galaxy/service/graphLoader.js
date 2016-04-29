@@ -43,9 +43,9 @@ function loadGraph(name, progress) {
   var manifest;
 
   return loadManifest()
-    .then(loadLabels)
     .then(loadPositions)
     .then(loadLinks)
+    .then(loadLabels)
     .then(convertToGraph);
 
   function convertToGraph() {
@@ -145,7 +145,7 @@ function loadGraph(name, progress) {
 
     function reportLinkProgress(percent) {
       progress({
-        message: name + ': initializing edges ',
+        message: 'initializing edges',
         completed: Math.round(percent * 100) + '%'
       });
     }
@@ -159,6 +159,9 @@ function loadGraph(name, progress) {
   }
 
   function loadLabels() {
+    progress({
+      message: 'downloading labels'
+    });
     return request(galaxyEndpoint + '/labels.json', {
       responseType: 'json',
       progress: reportProgress(name, 'labels')
@@ -173,7 +176,7 @@ function loadGraph(name, progress) {
   function reportProgress(name, file) {
     return function(e) {
       progress({
-        message: name + ': downloading ' + file,
+        message: 'downloading ' + file,
         completed: Math.round(e.percent * 100) + '%'
       });
     };
@@ -181,14 +184,14 @@ function loadGraph(name, progress) {
 }
 
 function defer() {
-    var resolve, reject;
-    var promise = new Promise(function() {
-        resolve = arguments[0];
-        reject = arguments[1];
-    });
-    return {
-        resolve: resolve,
-        reject: reject,
-        promise: promise
-    };
+  var resolve, reject;
+  var promise = new Promise(function() {
+    resolve = arguments[0];
+    reject = arguments[1];
+  });
+  return {
+    resolve: resolve,
+    reject: reject,
+    promise: promise
+  };
 }

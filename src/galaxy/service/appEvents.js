@@ -75,6 +75,8 @@ export default eventMirror([
 
   'hideHelp',
 
+  'loadProgress',
+
   'show2DGraph',
 
   // These events are not documented since I'm not sure whether to keep them

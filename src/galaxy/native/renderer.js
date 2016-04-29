@@ -23,35 +23,14 @@ import getNearestIndex from './getNearestIndex.js';
 import createTouchControl from './touchControl.js';
 import createLineView from './lineView.js';
 import appConfig from './appConfig.js';
+import NODE_COLORS from './nodeColors.js';
 import $ from 'jquery';
 
 export default sceneRenderer;
 
 var defaultNodeColor = 0xffffffff;
-var highlightNodeColor = 0xff0000ff;
+var highlightNodeColor = 0x984ea3ff;
 
-const NODE_COLORS = {
-  VERB: {
-    legend: '#e41a1c',
-    node: 0xe41a1cff
-  },
-  NOUN: {
-    legend: '#377eb8',
-    node: 0x377eb8ff
-  },
-  ADJECTIVE: {
-    legend: '#4daf4a',
-    node: 0x4daf4aff
-  },
-  ADJECTIVE_SATELLITE: {
-    legend: '#984ea3',
-    node: 0x984ea3ff
-  },
-  ADVERB: {
-    legend: '#ff7f00',
-    node: 0xff7f00ff
-  }
-};
 
 function sceneRenderer(container) {
   var renderer, positions, graphModel, touchControl, labels;
@@ -61,6 +40,7 @@ function sceneRenderer(container) {
 
   appEvents.positionsDownloaded.on(setPositions);
   appEvents.linksDownloaded.on(setLinks);
+  appEvents.labelsDownloaded.on(setColors);
   appEvents.toggleSteering.on(toggleSteering);
   appEvents.focusOnNode.on(focusOnNode);
   appEvents.around.on(around);
@@ -135,7 +115,6 @@ function sceneRenderer(container) {
     destroyHitTest();
 
     positions = _data.positions;
-    labels = _data.labels;
     focusScene();
 
     if (!renderer) {
@@ -148,44 +127,11 @@ function sceneRenderer(container) {
 
     renderer.particles(positions);
 
-    var view = renderer.getParticleView();
-    var colors = view.colors();
-
-    var i;
-    for (i = 0; i < labels.length; ++i) {
-      colorNode(i * 3, colors, getColorForNode(labels[i]));
-    }
-
-    var legend = $(".legend");
-    legend.empty();
-    for (var color in NODE_COLORS) {
-      if (!NODE_COLORS.hasOwnProperty(color)) return;
-      legend.append("<li style='border-color:" + NODE_COLORS[color].legend + "'><em>" + color + "</em></li>");
-    }
-
     hitTest = renderer.hitTest();
     hitTest.on('over', handleOver);
     hitTest.on('click', handleClick);
     hitTest.on('dblclick', handleDblClick);
     hitTest.on('hitTestReady', adjustMovementSpeed);
-  }
-
-  function getColorForNode(label) {
-    posCounter = posCounter || {};
-    switch (label.data.pos) {
-      case 'n':
-        return NODE_COLORS.NOUN.node;
-      case 'v':
-        return NODE_COLORS.VERB.node;
-      case 'a':
-        return NODE_COLORS.ADJECTIVE.node;
-      case 's':
-        return NODE_COLORS.ADJECTIVE_SATELLITE.node;
-      case 'r':
-        return NODE_COLORS.ADVERB.node;
-      default:
-        return defaultNodeColor;
-    }
   }
 
   function adjustMovementSpeed(tree) {
@@ -314,7 +260,8 @@ function sceneRenderer(container) {
     var sizes = view.sizes();
 
     if (lastHighlight !== undefined) {
-      colorNode(lastHighlight, colors, getColorForNode(labels[lastHighlight / 3]));
+      colorNode(lastHighlight, colors,
+        NODE_COLORS.getHexColor(labels[lastHighlight / 3].data.pos || defaultNodeColor));
       sizes[lastHighlight / 3] = lastHighlightSize;
     }
 
@@ -376,6 +323,30 @@ function sceneRenderer(container) {
     view.colors(colors);
   }
 
+  function setColors(_labels) {
+    labels = _labels;
+
+    var view = renderer.getParticleView();
+    var colors = view.colors();
+
+    var i;
+    for (i = 0; i < labels.length; ++i) {
+      colorNode(i * 3, colors,
+        NODE_COLORS.getHexColor(labels[i].data.pos || defaultNodeColor));
+    }
+
+    var legend = $(".legend");
+    legend.empty();
+    var allPos = NODE_COLORS.getAllPos();
+    for (i = 0; i < allPos.length; ++i) {
+      var color = NODE_COLORS.getStringColor(allPos[i]);
+      legend.append("<li style='border-color:" + color + "'><em>" +
+        getLegendLabel(allPos[i]) + "</em></li>");
+    }
+
+    view.colors(colors);
+  }
+
   function toNativeIndex(i) {
     return i.id * 3;
   }
@@ -385,6 +356,23 @@ function sceneRenderer(container) {
       // since each node represented as triplet we need to divide by 3 to
       // get actual index:
       return nearestIndex / 3
+    }
+  }
+
+  function getLegendLabel(pos) {
+    switch (pos) {
+      case 'n':
+        return 'noun';
+      case 'v':
+        return 'verb';
+      case 'a':
+        return 'adjective';
+      case 's':
+        return 'adjective sat';
+      case 'r':
+        return 'adverb';
+      default:
+        return null;
     }
   }
 
