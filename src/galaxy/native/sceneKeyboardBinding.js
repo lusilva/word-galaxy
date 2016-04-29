@@ -41,6 +41,7 @@ function sceneKeyboardBinding(container) {
       lastShiftKey = true;
       events.accelerateNavigation.fire(true);
     }
+    events.hideAllWindows.fire();
   }
 
   function keyup(e) {

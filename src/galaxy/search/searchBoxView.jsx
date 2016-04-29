@@ -30,11 +30,17 @@ function searchBar(x) {
 
   x.componentDidMount = function() {
     appEvents.graphDownloaded.on(show);
+    appEvents.hideAllWindows.on(clear);
   };
 
   x.componentWillUnmount = function() {
+    appEvents.hideAllWindows.off(clear);
     appEvents.graphDownloaded.off(show);
   };
+
+  function clear() {
+    ReactDOM.findDOMNode(x.refs.searchText).value = ''
+  }
 
   function show() {
     shouldShow = true;

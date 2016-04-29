@@ -79,6 +79,8 @@ export default eventMirror([
 
   'show2DGraph',
 
+  'hideAllWindows',
+
   // These events are not documented since I'm not sure whether to keep them
    'showNodeListWindow',
    'hideNodeListWindow',

@@ -7,6 +7,7 @@ function windowCollectionModel() {
 
   appEvents.showNodeListWindow.on(showWindow);
   appEvents.hideNodeListWindow.on(hideWindow);
+  appEvents.hideAllWindows.on(hideAllWindows);
 
   var api = {
     getWindows: getWindows
@@ -18,6 +19,22 @@ function windowCollectionModel() {
   eventify(api);
 
   return api;
+
+
+  function hideAllWindows() {
+    if (registeredWindows) {
+      for (var windowId in registeredWindows) {
+        hideWindow(windowId);
+      }
+    }
+
+    while (allWindows.length) {
+      var head = allWindows[0];
+      var tail = allWindows.length > 1 ? allWindows.splice(0, 1) : [];
+      allWindows = tail;
+      api.fire('changed', 0);
+    }
+  }
 
   function getWindows() {
     return allWindows;
