@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fd1100f-99a9-45c3-a549-1673c73ed065" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/native/sceneKeyboardBinding.js" afterPath="$PROJECT_DIR$/src/galaxy/native/sceneKeyboardBinding.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/nodeDetails/nodeDetailsView.jsx" afterPath="$PROJECT_DIR$/src/galaxy/nodeDetails/nodeDetailsView.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx" afterPath="$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/service/appEvents.js" afterPath="$PROJECT_DIR$/src/galaxy/service/appEvents.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/windows/windowCollectionModel.js" afterPath="$PROJECT_DIR$/src/galaxy/windows/windowCollectionModel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="pm.iws" />
     <ignored path=".idea/workspace.xml" />
