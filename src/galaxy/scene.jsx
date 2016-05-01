@@ -64,9 +64,9 @@ function scene(x) {
 
 
   function show2DGraph(nodeId, focusNodeCallback) {
-
     let fullGraph = $('.graph-full-size');
     fullGraph.removeAttr("tabindex");
+    fullGraph.blur();
     fullGraph.addClass('mini');
 
     var x = 0;
