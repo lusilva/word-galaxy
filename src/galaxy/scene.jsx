@@ -13,6 +13,7 @@ import Legend from './legend.jsx';
 
 import WindowCollection from './windows/windowCollectionView.jsx';
 import createNativeRenderer from './native/renderer.js';
+import createTwoDGraphRenderer from './twoDGraph/renderer.js';
 import createKeyboardBindings from './native/sceneKeyboardBinding.js';
 
 import appEvents from './service/appEvents.js';
@@ -22,6 +23,7 @@ module.exports = require('maco')(scene, React);
 function scene(x) {
   var nativeRenderer, keyboard;
   var hoverModel, delegateClickHandler;
+  var twoDGraphRenderer;
 
   x.render = function() {
     if (!webglEnabled) {
@@ -50,6 +52,8 @@ function scene(x) {
     if (!webglEnabled) return;
     var container = findDOMNode(x.refs.graphContainer);
     nativeRenderer = createNativeRenderer(container);
+    var twoDGraphContainer = findDOMNode(x.refs.secondaryGraphContainer);
+    twoDGraphRenderer = createTwoDGraphRenderer(twoDGraphContainer);
     keyboard = createKeyboardBindings(container);
     delegateClickHandler = container.parentNode;
     delegateClickHandler.addEventListener('click', handleDelegateClick);
@@ -82,6 +86,8 @@ function scene(x) {
   }
 
   function hide2DGraph(nodeId, focusNodeCallback) {
+    twoDGraphRenderer.destroy();
+
     let fullGraph = $('.graph-full-size');
     fullGraph.attr("tabindex", -1);
     fullGraph.removeClass('mini');
