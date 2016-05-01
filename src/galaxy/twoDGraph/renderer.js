@@ -9,6 +9,7 @@ export default renderer;
 // dom object = container
 function renderer(container) {
   var force, root, link, node, svg;
+  var connectionType = 'out';
 
   // upon showing the 2D graph call the render function
   appEvents.show2DGraph.on(render);
@@ -62,6 +63,12 @@ function renderer(container) {
 
     var rootInfo = scene.getNodeInfo(selectedNodeId);
 
+    var type = connectionType == 'out' ? 'hyponyms' : 'hypernyms';
+
+    appEvents.loadProgress.fire({
+      message: 'displaying ' + type + ' for ' + rootInfo.name
+    });
+
     root = {
       name: rootInfo.name,
       id: rootInfo.id
@@ -87,7 +94,7 @@ function renderer(container) {
 
   function expandFromNode(selectedNodeId) {
     var node = scene.getNodeInfo(selectedNodeId);
-    var nodeChildren = scene.getConnected(selectedNodeId, 'out')
+    var nodeChildren = scene.getConnected(selectedNodeId, connectionType);
     addChildrenToNode(node.name, nodeChildren, root);
   }
 
@@ -109,7 +116,7 @@ function renderer(container) {
     link.exit().remove();
 
     link.enter().insert("line", ".node")
-      .attr("class", "link");
+      .attr("class", "link " + (connectionType || ''));
 
     // Update nodes.
     node = node.data(nodes, function(d) {
@@ -160,6 +167,7 @@ function renderer(container) {
   }
 
   function color(d) {
+    if (d.name === root.name) return '#984ea3';
     var nodeInfo = scene.getNodeInfo(d.id);
     return NODE_COLORS.getStringColor(nodeInfo.pos);
   }
@@ -167,7 +175,9 @@ function renderer(container) {
   // Toggle children on click.
   function click(d) {
     if (d3.event.defaultPrevented) return; // ignore drag
-    if (d.name == root.name) return;
+    if (d.name == root.name) {
+      connectionType = connectionType == 'out' ? 'in' : 'out';
+    }
     hideHover();
     appEvents.focusOnNode.fire(d.id);
   }
@@ -201,6 +211,7 @@ function renderer(container) {
   }
 
   function destroy() {
+    appEvents.loadProgress.fire({});
     d3.select(window).on('resize', null);
     hideHover();
     root = {};
