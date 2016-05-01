@@ -2,50 +2,70 @@ import appEvents from '../service/appEvents';
 import d3 from "d3";
 import scene from '../store/scene.js';
 import eventify from 'ngraph.events';
+import NODE_COLORS from '../native/nodeColors.js';
 
 export default renderer;
 
 // dom object = container
-function renderer(container){
+function renderer(container) {
   var force, root, link, node, svg;
 
   // upon showing the 2D graph call the render function
   appEvents.show2DGraph.on(render);
+  appEvents.focusOnNode.on(onFocus);
+
 
   var api = {
     destroy: destroy
-  }
+  };
 
   eventify(api);
 
   return api;
 
-  function render(selectedNodeId){
-    console.log('render');
+
+  function onFocus(selectedNodeId) {
+    if (force)
+      render(selectedNodeId);
+  }
+
+  function resize() {
     var width = window.innerWidth,
-    height = window.innerHeight;
+      height = window.innerHeight;
+    force.size([width, height]);
+  }
+
+  function render(selectedNodeId) {
+    var width = window.innerWidth,
+      height = window.innerHeight;
+
+    if (force)
+      destroy();
+
+    d3.select(window).on('resize', resize);
 
     force = d3.layout.force()
-    .linkDistance(150)
-    .charge(-120)
-    .gravity(.05)
-    .size([width, height])
-    .on("tick", tick);
+      .linkDistance(150)
+      .charge(-500)
+      .gravity(.05)
+      .size([width, height])
+      .on("tick", tick);
 
     //
     svg = d3.select(container).append("svg")
-    .attr("id", "twoDGraphSVG")
-    .attr("width", width)
-    .attr("height", height);
+      .attr("id", "twoDGraphSVG")
+      .attr("width", width)
+      .attr("height", height);
 
     link = svg.selectAll(".link"),
-    node = svg.selectAll(".node");
+      node = svg.selectAll(".node");
 
     var rootInfo = scene.getNodeInfo(selectedNodeId);
 
     root = {
-      name: rootInfo.name
-    }
+      name: rootInfo.name,
+      id: rootInfo.id
+    };
 
     // root structure
     expandFromNode(selectedNodeId);
@@ -65,7 +85,7 @@ function renderer(container){
     }
   }
 
-  function expandFromNode(selectedNodeId){
+  function expandFromNode(selectedNodeId) {
     var node = scene.getNodeInfo(selectedNodeId);
     var nodeChildren = scene.getConnected(selectedNodeId, 'out')
     addChildrenToNode(node.name, nodeChildren, root);
@@ -73,70 +93,97 @@ function renderer(container){
 
   function update() {
     var nodes = flatten(root),
-    links = d3.layout.tree().links(nodes);
+      links = d3.layout.tree().links(nodes);
 
     // Restart the force layout.
     force
-    .nodes(nodes)
-    .links(links)
-    .start();
+      .nodes(nodes)
+      .links(links)
+      .start();
 
     // Update links.
-    link = link.data(links, function(d) { return d.target.id; });
+    link = link.data(links, function(d) {
+      return d.target.id;
+    });
 
     link.exit().remove();
 
     link.enter().insert("line", ".node")
-    .attr("class", "link");
+      .attr("class", "link");
 
     // Update nodes.
-    node = node.data(nodes, function(d) { return d.id; });
+    node = node.data(nodes, function(d) {
+      return d.id;
+    });
 
     node.exit().remove();
 
     var nodeEnter = node.enter().append("g")
-    .attr("class", "node")
-    .on("click", click)
-    .call(force.drag);
+      .attr("class", "node")
+      .on("click", click)
+      .on("mouseover", hover)
+      .on("mouseout", hideHover)
+      .call(force.drag);
 
     nodeEnter.append("circle")
-    .attr("r", function(d) { return 30; });
+      .attr("r", function(d) {
+        return 25;
+      });
 
     nodeEnter.append("text")
-    .attr("dy", ".35em")
-    .text(function(d) { return d.name; });
+      .attr("dy", ".35em")
+      .text(function(d) {
+        return d.name;
+      });
 
     node.select("circle")
-    .style("fill", "black")
-    // .style("fill", "hidden");
+      .style("fill", color);
   }
 
   function tick() {
-    link.attr("x1", function(d) { return d.source.x; })
-    .attr("y1", function(d) { return d.source.y; })
-    .attr("x2", function(d) { return d.target.x; })
-    .attr("y2", function(d) { return d.target.y; });
+    link.attr("x1", function(d) {
+        return d.source.x;
+      })
+      .attr("y1", function(d) {
+        return d.source.y;
+      })
+      .attr("x2", function(d) {
+        return d.target.x;
+      })
+      .attr("y2", function(d) {
+        return d.target.y;
+      });
 
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    node.attr("transform", function(d) {
+      return "translate(" + d.x + "," + d.y + ")";
+    });
   }
 
   function color(d) {
-    return d._children ? "#3182bd" // collapsed package
-    : d.children ? "#c6dbef" // expanded package
-    : "#fd8d3c"; // leaf node
+    var nodeInfo = scene.getNodeInfo(d.id);
+    return NODE_COLORS.getStringColor(nodeInfo.pos);
   }
 
   // Toggle children on click.
   function click(d) {
     if (d3.event.defaultPrevented) return; // ignore drag
     if (d.name == root.name) return;
-    if (d.children) {
-      d.children = null;
-    } else {
-      var nodeChildren = scene.getConnected(d.id, 'out');
-      d.children = nodeChildren;
-    }
-    update();
+    hideHover();
+    appEvents.focusOnNode.fire(d.id);
+  }
+
+  function hover(d) {
+    appEvents.nodeHover.fire({
+      nodeIndex: d.id,
+      mouseInfo: {x: d.x, y: d.y}
+    });
+  }
+
+  function hideHover() {
+    appEvents.nodeHover.fire({
+      nodeIndex: undefined,
+      mouseInfo: undefined
+    })
   }
 
   // Returns a list of all nodes under the root.
@@ -153,8 +200,9 @@ function renderer(container){
     return nodes;
   }
 
-  function destroy(){
-    console.log('destroyed');
+  function destroy() {
+    d3.select(window).on('resize', null);
+    hideHover();
     root = {};
     node.remove();
     link.remove();

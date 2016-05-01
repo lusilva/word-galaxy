@@ -19,7 +19,7 @@ function searchBar(x) {
             <div className='input-group'>
               <input type='search'
                      ref='searchText'
-                     onChange={debounce(runSearch, 250)}
+                     onChange={debounce(runSearch, 500)}
                      className='form-control no-shadow' placeholder='Search...'/>
             </div>
           </form>
@@ -39,7 +39,9 @@ function searchBar(x) {
   };
 
   function clear() {
-    ReactDOM.findDOMNode(x.refs.searchText).value = ''
+    var searchBox = ReactDOM.findDOMNode(x.refs.searchText);
+    if (searchBox)
+      searchBox.value = ''
   }
 
   function show() {

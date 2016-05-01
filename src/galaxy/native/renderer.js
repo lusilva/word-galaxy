@@ -259,7 +259,7 @@ function sceneRenderer(container) {
     var colors = view.colors();
     var sizes = view.sizes();
 
-    if (lastHighlight !== undefined) {
+    if (lastHighlight !== undefined && labels) {
       colorNode(lastHighlight, colors,
         NODE_COLORS.getHexColor(labels[lastHighlight / 3].data.pos || defaultNodeColor));
       sizes[lastHighlight / 3] = lastHighlightSize;

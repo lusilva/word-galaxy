@@ -43,7 +43,5 @@ function windowTitle(props) {
       </div>
     );
   }
-  console.log(item);
-
   return <div className="row">{resultNode(item, 0)}</div>
 }
