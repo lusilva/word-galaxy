@@ -77,7 +77,9 @@ export default eventMirror([
 
   'loadProgress',
 
+  // 2d graph events
   'show2DGraph',
+  'hide2DGraph',
 
   'hideAllWindows',
 
@@ -96,4 +98,3 @@ export default eventMirror([
 
    'accelerateNavigation'
 ], appEvents);
-
