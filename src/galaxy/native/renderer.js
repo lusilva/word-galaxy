@@ -100,6 +100,8 @@ function sceneRenderer(container) {
   function focusOnNode(nodeId) {
     if (!renderer) return;
 
+    appEvents.hideAllWindows.fire();
+
     renderer.lookAt(nodeId * 3, highlightFocused);
 
     function highlightFocused() {

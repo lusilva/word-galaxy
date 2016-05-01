@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fd1100f-99a9-45c3-a549-1673c73ed065" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/native/renderer.js" afterPath="$PROJECT_DIR$/src/galaxy/native/renderer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx" afterPath="$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/twoDGraph/renderer.js" afterPath="$PROJECT_DIR$/src/galaxy/twoDGraph/renderer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/galaxy/windows/nodeInfoRow.jsx" afterPath="$PROJECT_DIR$/src/galaxy/windows/nodeInfoRow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/twoDGraph.less" afterPath="$PROJECT_DIR$/src/styles/twoDGraph.less" />
     </list>
     <ignored path="pm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,23 +33,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchBoxView.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="searchBoxView.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7304348">
+            <state vertical-scroll-proportion="0.0">
               <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="renderer.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="renderer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/galaxy/native/renderer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.4444447">
-              <caret line="8" column="39" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.41423357">
+              <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
               <folding>
-                <marker date="1462139140000" expanded="true" signature="9316:9329" placeholder="..." />
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1462140266000" expanded="true" signature="9354:9367" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -172,9 +168,9 @@
         <option value="$PROJECT_DIR$/src/galaxy/windows/nodeInfoRow.jsx" />
         <option value="$PROJECT_DIR$/src/styles/twoDGraph.less" />
         <option value="$PROJECT_DIR$/src/galaxy/service/appEvents.js" />
-        <option value="$PROJECT_DIR$/src/galaxy/native/renderer.js" />
         <option value="$PROJECT_DIR$/src/galaxy/twoDGraph/renderer.js" />
         <option value="$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx" />
+        <option value="$PROJECT_DIR$/src/galaxy/native/renderer.js" />
       </list>
     </option>
   </component>
@@ -957,24 +953,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/galaxy/store/hover.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/galaxy/native/renderer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4444447">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="39" />
-          <folding>
-            <marker date="1462139140000" expanded="true" signature="9316:9329" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/galaxy/twoDGraph/renderer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.518518">
@@ -985,9 +963,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/galaxy/search/searchBoxView.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7304348">
+        <state vertical-scroll-proportion="0.0">
           <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/galaxy/store/hover.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/galaxy/native/renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41423357">
+          <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1462140266000" expanded="true" signature="9354:9367" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
