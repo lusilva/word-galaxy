@@ -1,3 +1,0 @@
-Meteor.call('calculateLayout')
-Meteor.call('calculateLayout')
-Meteor.call('calculateLayout')
