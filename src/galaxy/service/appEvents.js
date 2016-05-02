@@ -73,6 +73,9 @@ export default eventMirror([
    */
   'toggleHelp',
 
+  /**
+   * fired when the help screen should be hidden.
+   */
   'hideHelp',
 
   'loadProgress',
@@ -81,7 +84,15 @@ export default eventMirror([
   'show2DGraph',
   'hide2DGraph',
 
+  /**
+   * hide all the windows shown to the user.
+   */
   'hideAllWindows',
+
+  /**
+   * show message
+   */
+  'showMessage',
 
   // These events are not documented since I'm not sure whether to keep them
    'showNodeListWindow',

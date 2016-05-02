@@ -14,6 +14,7 @@ function renderer(container) {
   // upon showing the 2D graph call the render function
   appEvents.show2DGraph.on(render);
   appEvents.focusOnNode.on(onFocus);
+  appEvents.showDegree.on(updateConnections);
 
 
   var api = {
@@ -28,6 +29,24 @@ function renderer(container) {
   function onFocus(selectedNodeId) {
     if (force)
       render(selectedNodeId);
+  }
+
+  function updateConnections(nodeId, _connectionType) {
+    connectionType = _connectionType;
+    if (force) {
+      root.children = undefined;
+      expandFromNode(nodeId);
+      updateMessage(nodeId);
+      update();
+    }
+  }
+
+  function updateMessage(nodeId) {
+    var rootInfo = scene.getNodeInfo(nodeId);
+    appEvents.showMessage.fire({
+      type: connectionType,
+      root: rootInfo
+    });
   }
 
   function resize() {
@@ -48,31 +67,25 @@ function renderer(container) {
     force = d3.layout.force()
       .linkDistance(150)
       .charge(-500)
-      .gravity(.05)
       .size([width, height])
       .on("tick", tick);
 
-    //
     svg = d3.select(container).append("svg")
       .attr("id", "twoDGraphSVG")
       .attr("width", width)
       .attr("height", height);
 
-    link = svg.selectAll(".link"),
-      node = svg.selectAll(".node");
+    link = svg.selectAll(".link");
+    node = svg.selectAll(".node");
 
     var rootInfo = scene.getNodeInfo(selectedNodeId);
-
-    var type = connectionType == 'out' ? 'hyponyms' : 'hypernyms';
-
-    appEvents.loadProgress.fire({
-      message: 'displaying ' + type + ' for ' + rootInfo.name
-    });
 
     root = {
       name: rootInfo.name,
       id: rootInfo.id
     };
+
+    updateMessage(selectedNodeId);
 
     // root structure
     expandFromNode(selectedNodeId);
@@ -211,7 +224,7 @@ function renderer(container) {
   }
 
   function destroy() {
-    appEvents.loadProgress.fire({});
+    appEvents.showMessage.fire(null);
     d3.select(window).on('resize', null);
     hideHover();
     root = {};

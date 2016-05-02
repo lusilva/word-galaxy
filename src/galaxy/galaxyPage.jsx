@@ -1,5 +1,6 @@
 import React from 'react';
 import LoadingIndicator from './loadingIndicator.jsx';
+import MessageRibbon from './messageRibbon.jsx';
 import Scene from './scene.jsx';
 import appEvents from './service/appEvents.js';
 
@@ -13,6 +14,7 @@ function galaxyPage(x) {
 
     return (
       <div>
+        <MessageRibbon />
         <LoadingIndicator />
         <Scene />
       </div>
