@@ -28,15 +28,11 @@ function about(x) {
                 synsets
                 shown in this visualization, which are all the synsets stored in WordNet.
               </p>
-              <h4>What does hypernym/hoponym mean?</h4>
+              <h4>What does hypernym/hyponym mean?</h4>
               <p>
-                Take "wheat" and "grain", for example. You can see a link going from "wheat" pointing towards "grain"
-                which
-                means that wheat "is a kind of" grain. Here, "wheat" is a hyponym and "grain" is a hypernym. In the case
-                of
-                verbs this same link can be understood better by "is one way to". So, for example, to trot "is one way
-                to"
-                walk.
+                A hypernym is superset of a word, while a hyponym is a subset. For example, take the words "animal" and
+                "organism". You can see a link going from "organism" pointing towards "animal" which
+                means that an animal "is a kind of" organism. Here, "animal" is a hyponym and "organism" is a hypernym.
               </p>
               <h4>How does search work?</h4>
               <p>
@@ -66,6 +62,9 @@ function about(x) {
                 <h4>Issues</h4>
                 Found an issue or bug? Please report it on our <a target="__blank"
                                                                   href="https://github.com/lusilva/word-galaxy">github</a>
+              </p>
+              <p>
+                This project was built by Lucas Silva and Connor Ameres, for Interactive Visualization course at RPI.
               </p>
             </div>
             <div className="col-xs-12">
